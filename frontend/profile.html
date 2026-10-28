@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | BrainCare AI</title>
+
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+
+<body>
+
+
+<div class="profile-page">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="dashboard-brand">
+
+            <div class="dashboard-logo">
+                🧠
+            </div>
+
+            <span>
+                BrainCare <strong>AI</strong>
+            </span>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a href="dashboard.html">
+
+                <span>▣</span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="upload.html">
+
+                <span>＋</span>
+
+                Upload MRI
+
+            </a>
+
+
+            <a href="scans.html">
+
+                <span>◉</span>
+
+                My Scans
+
+            </a>
+
+
+            <a href="reports.html">
+
+                <span>▤</span>
+
+                Reports
+
+            </a>
+
+
+            <a href="profile.html"
+               class="active">
+
+                <span>●</span>
+
+                My Profile
+
+            </a>
+
+
+            <a href="settings.html">
+
+                <span>⚙</span>
+
+                Settings
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html">
+
+                <span>↪</span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="profile-main">
+
+
+        <!-- =========================================
+             TOP BAR
+        ========================================== -->
+
+        <header class="profile-topbar">
+
+
+            <div>
+
+                <p class="page-label">
+                    Patient Dashboard
+                </p>
+
+
+                <h2>
+                    My Profile
+                </h2>
+
+            </div>
+
+
+            <!-- PATIENT PROFILE -->
+
+            <div class="patient-profile">
+
+
+                <div class="patient-avatar"
+                     id="topAvatar">
+
+                    BR
+
+                </div>
+
+
+                <div>
+
+                    <strong id="topPatientName">
+                        Bhaskar Roy
+                    </strong>
+
+
+                    <small>
+                        Patient
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =========================================
+             PROFILE HEADER
+        ========================================== -->
+
+        <section class="profile-header-card">
+
+
+            <div class="large-profile-avatar"
+                 id="profileAvatar">
+
+                BR
+
+            </div>
+
+
+            <div class="profile-header-info">
+
+
+                <h1 id="profileName">
+                    Bhaskar Roy
+                </h1>
+
+
+                <p>
+                    Patient
+                </p>
+
+
+                <span class="patient-id">
+
+                    Patient ID:
+                    <span id="patientId">
+                        P0005
+                    </span>
+
+                </span>
+
+
+            </div>
+
+
+            <div class="profile-status">
+
+                <span class="status-dot"></span>
+
+                Account Active
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             PERSONAL INFORMATION
+        ========================================== -->
+
+        <section class="profile-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <span class="section-label">
+                        PERSONAL INFORMATION
+                    </span>
+
+
+                    <h2>
+                        Personal Details
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROFILE FORM -->
+
+            <form id="profileForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full Name
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter your phone number">
+
+                    </div>
+
+
+
+                    <!-- DATE OF BIRTH -->
+
+                    <div class="form-group">
+
+                        <label for="dob">
+                            Date of Birth
+                        </label>
+
+
+                        <input
+                            type="date"
+                            id="dob">
+
+                    </div>
+
+
+
+                    <!-- GENDER -->
+
+                    <div class="form-group">
+
+                        <label for="gender">
+                            Gender
+                        </label>
+
+
+                        <select id="gender">
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option value="male">
+                                Male
+                            </option>
+
+                            <option value="female">
+                                Female
+                            </option>
+
+                            <option value="other">
+                                Other
+                            </option>
+
+                            <option value="prefer-not">
+                                Prefer not to say
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- BLOOD GROUP -->
+
+                    <div class="form-group">
+
+                        <label for="bloodGroup">
+                            Blood Group
+                        </label>
+
+
+                        <select id="bloodGroup">
+
+                            <option value="">
+                                Select Blood Group
+                            </option>
+
+                            <option value="A+">
+                                A+
+                            </option>
+
+                            <option value="A-">
+                                A-
+                            </option>
+
+                            <option value="B+">
+                                B+
+                            </option>
+
+                            <option value="B-">
+                                B-
+                            </option>
+
+                            <option value="AB+">
+                                AB+
+                            </option>
+
+                            <option value="AB-">
+                                AB-
+                            </option>
+
+                            <option value="O+">
+                                O+
+                            </option>
+
+                            <option value="O-">
+                                O-
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group full-width">
+
+                        <label for="address">
+                            Address
+                        </label>
+
+
+                        <textarea
+                            id="address"
+                            rows="3"
+                            placeholder="Enter your address"></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FORM ACTIONS -->
+
+                <div class="form-actions">
+
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        id="cancelBtn">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-btn">
+
+                        ✓ Save Changes
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             ACCOUNT INFORMATION
+        ========================================== -->
+
+        <section class="account-grid">
+
+
+            <!-- PATIENT ID -->
+
+            <div class="account-card">
+
+
+                <div class="account-icon">
+                    🪪
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Patient ID
+                    </span>
+
+
+                    <h3 id="accountPatientId">
+                        P0005
+                    </h3>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ACCOUNT CREATED -->
+
+            <div class="account-card">
+
+
+                <div class="account-icon">
+                    📅
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Account Created
+                    </span>
+
+
+                    <h3 id="accountCreated">
+                        September 2026
+                    </h3>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ACCOUNT STATUS -->
+
+            <div class="account-card">
+
+
+                <div class="account-icon">
+                    🔒
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Account Status
+                    </span>
+
+
+                    <h3 id="accountStatus">
+                        Active
+                    </h3>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             PROFILE INFORMATION
+        ========================================== -->
+
+        <section class="profile-info-card">
+
+
+            <div class="info-icon">
+                🔒
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Your Information is Private
+                </h3>
+
+
+                <p>
+
+                    Your personal information and MRI scan
+                    records are associated with your patient
+                    account. Your information should only be
+                    accessible to authorized users.
+
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             MEDICAL DISCLAIMER
+        ========================================== -->
+
+        <div class="medical-disclaimer">
+
+
+            <strong>
+                ⚠ Medical Disclaimer
+            </strong>
+
+
+            <p>
+
+                BrainCare AI is an AI-assisted screening
+                tool and is not a replacement for professional
+                medical diagnosis. Always consult a qualified
+                healthcare professional for medical advice.
+
+            </p>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="js/profile.js"></script>
+
+
+</body>
+
+</html>

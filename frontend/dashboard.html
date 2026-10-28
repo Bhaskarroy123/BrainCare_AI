@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | BrainCare AI</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-container">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- Logo -->
+
+        <div class="dashboard-brand">
+
+            <div class="dashboard-logo">
+                🧠
+            </div>
+
+            <span>
+                BrainCare <strong>AI</strong>
+            </span>
+
+        </div>
+
+
+        <!-- =========================================
+             NAVIGATION
+        ========================================== -->
+
+        <nav class="sidebar-nav">
+
+
+            <!-- Dashboard -->
+
+            <a href="dashboard.html" class="active">
+
+                <span>▣</span>
+
+                Dashboard
+
+            </a>
+
+
+            <!-- Upload MRI -->
+
+            <a href="upload.html">
+
+                <span>＋</span>
+
+                Upload MRI
+
+            </a>
+
+
+            <!-- My Scans -->
+
+            <a href="scans.html">
+
+                <span>◉</span>
+
+                My Scans
+
+            </a>
+
+
+            <!-- Reports -->
+
+            <a href="reports.html">
+
+                <span>▤</span>
+
+                Reports
+
+            </a>
+
+
+            <!-- My Profile -->
+
+            <a href="profile.html">
+
+                <span>●</span>
+
+                My Profile
+
+            </a>
+
+
+            <!-- Settings -->
+
+            <a href="settings.html">
+
+                <span>⚙</span>
+
+                Settings
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- =========================================
+             LOGOUT
+        ========================================== -->
+
+        <div class="sidebar-bottom">
+
+
+            <a href="index.html">
+
+                <span>↪</span>
+
+                Logout
+
+            </a>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- =========================================
+             TOP BAR
+        ========================================== -->
+
+        <header class="dashboard-topbar">
+
+
+            <div>
+
+                <p class="dashboard-page-label">
+                    Patient Dashboard
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <button
+                    class="notification-btn"
+                    type="button">
+
+                    🔔
+
+                </button>
+
+
+                <div class="patient-mini-profile">
+
+
+                    <div class="patient-avatar">
+                        BR
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Bhaskar Roy
+                        </strong>
+
+                        <small>
+                            Patient
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =========================================
+             WELCOME
+        ========================================== -->
+
+        <section class="welcome-section">
+
+
+            <div>
+
+
+                <p class="welcome-small">
+                    Welcome back 👋
+                </p>
+
+
+                <h1>
+
+                    Welcome Back,
+
+                    <span>
+                        Bhaskar Roy
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Manage your MRI scans, reports,
+                    and health information from one place.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="dashboard-date">
+
+
+                <span>
+                    Today
+                </span>
+
+
+                <strong>
+                    27 September 2026
+                </strong>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             SUMMARY CARDS
+        ========================================== -->
+
+        <section class="summary-grid">
+
+
+            <!-- =================================
+                 MRI SCANS
+            ================================== -->
+
+            <div class="summary-card">
+
+
+                <div class="summary-icon blue">
+                    🧠
+                </div>
+
+
+                <div>
+
+
+                    <p>
+                        My MRI Scans
+                    </p>
+
+
+                    <h2>
+                        0
+                    </h2>
+
+
+                    <small>
+                        Total scans
+                    </small>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 ANALYSES
+            ================================== -->
+
+            <div class="summary-card">
+
+
+                <div class="summary-icon green">
+                    ✓
+                </div>
+
+
+                <div>
+
+
+                    <p>
+                        Analyses Completed
+                    </p>
+
+
+                    <h2>
+                        0
+                    </h2>
+
+
+                    <small>
+                        Successfully analyzed
+                    </small>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 LATEST RESULT
+            ================================== -->
+
+            <div class="summary-card">
+
+
+                <div class="summary-icon purple">
+                    ◉
+                </div>
+
+
+                <div>
+
+
+                    <p>
+                        Latest Result
+                    </p>
+
+
+                    <h2>
+                        —
+                    </h2>
+
+
+                    <small>
+                        No scan yet
+                    </small>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 CONFIDENCE
+            ================================== -->
+
+            <div class="summary-card">
+
+
+                <div class="summary-icon orange">
+                    %
+                </div>
+
+
+                <div>
+
+
+                    <p>
+                        Average Confidence
+                    </p>
+
+
+                    <h2>
+                        —
+                    </h2>
+
+
+                    <small>
+                        No analysis yet
+                    </small>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             MAIN DASHBOARD GRID
+        ========================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- =================================
+                 UPLOAD MRI CARD
+            ================================== -->
+
+            <div class="upload-card">
+
+
+                <div class="upload-header">
+
+
+                    <div>
+
+
+                        <span class="section-label">
+                            AI ANALYSIS
+                        </span>
+
+
+                        <h2>
+                            Analyze Your MRI Scan
+                        </h2>
+
+
+                        <p>
+                            Upload your brain MRI image
+                            for AI-powered analysis.
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="upload-icon">
+                        🧠
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="upload-area">
+
+
+                    <div class="upload-cloud">
+                        ↑
+                    </div>
+
+
+                    <h3>
+                        Upload MRI Scan
+                    </h3>
+
+
+                    <p>
+                        Drag & drop your MRI image here
+                        or choose a file from your computer.
+                    </p>
+
+
+                    <!-- FIXED NAVIGATION -->
+
+                    <a
+                        href="upload.html"
+                        class="upload-btn">
+
+                        Choose MRI Image
+
+                    </a>
+
+
+                    <small>
+                        Supported formats: JPG, JPEG, PNG
+                    </small>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 LATEST RESULT
+            ================================== -->
+
+            <div class="latest-result-card">
+
+
+                <div class="card-header">
+
+
+                    <div>
+
+
+                        <span class="section-label">
+                            LATEST RESULT
+                        </span>
+
+
+                        <h2>
+                            AI Detection
+                        </h2>
+
+
+                    </div>
+
+
+                    <span class="status-badge">
+                        No Result
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="no-result">
+
+
+                    <div class="no-result-icon">
+                        🧠
+                    </div>
+
+
+                    <h3>
+                        No MRI Scan Yet
+                    </h3>
+
+
+                    <p>
+                        Upload an MRI scan to see
+                        your AI analysis result here.
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             RECENT SCANS
+        ========================================== -->
+
+        <section class="recent-scans-card">
+
+
+            <div class="card-header">
+
+
+                <div>
+
+
+                    <span class="section-label">
+                        HISTORY
+                    </span>
+
+
+                    <h2>
+                        Recent Scans
+                    </h2>
+
+
+                </div>
+
+
+                <!-- FIXED VIEW ALL -->
+
+                <a href="scans.html">
+                    View All
+                </a>
+
+
+            </div>
+
+
+
+            <div class="empty-history">
+
+
+                <div>
+                    📋
+                </div>
+
+
+                <h3>
+                    No scan history
+                </h3>
+
+
+                <p>
+                    Your completed MRI scans will
+                    appear here.
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             MEDICAL DISCLAIMER
+        ========================================== -->
+
+        <div class="medical-disclaimer">
+
+
+            <strong>
+                ⚠ Medical Disclaimer
+            </strong>
+
+
+            <p>
+
+                BrainCare AI is an AI-assisted screening
+                tool and is not a replacement for professional
+                medical diagnosis. Always consult a qualified
+                healthcare professional for medical advice.
+
+            </p>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     DASHBOARD JAVASCRIPT
+========================================== -->
+
+<script src="js/navigation.js"></script>
+<script src="js/dashboard.js"></script>
+
+
+</body>
+
+</html>

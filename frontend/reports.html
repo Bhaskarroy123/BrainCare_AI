@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Reports | BrainCare AI</title>
+
+    <link rel="stylesheet" href="css/reports.css">
+
+</head>
+
+
+<body>
+
+
+<div class="reports-page">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="dashboard-brand">
+
+            <div class="dashboard-logo">
+                🧠
+            </div>
+
+            <span>
+                BrainCare <strong>AI</strong>
+            </span>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a href="dashboard.html">
+
+                <span>▣</span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="upload.html">
+
+                <span>＋</span>
+
+                Upload MRI
+
+            </a>
+
+
+            <a href="scans.html">
+
+                <span>◉</span>
+
+                My Scans
+
+            </a>
+
+
+            <a href="reports.html"
+               class="active">
+
+                <span>▤</span>
+
+                Reports
+
+            </a>
+
+
+            <a href="profile.html">
+
+                <span>●</span>
+
+                My Profile
+
+            </a>
+
+
+            <a href="settings.html">
+
+                <span>⚙</span>
+
+                Settings
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html">
+
+                <span>↪</span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="reports-main">
+
+
+        <!-- =========================================
+             TOP BAR
+        ========================================== -->
+
+        <header class="reports-topbar">
+
+
+            <div>
+
+                <p class="page-label">
+                    Patient Dashboard
+                </p>
+
+
+                <h2>
+                    My Reports
+                </h2>
+
+            </div>
+
+
+            <!-- PATIENT PROFILE -->
+
+            <div class="patient-profile">
+
+
+                <div class="patient-avatar">
+                    BR
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Bhaskar Roy
+                    </strong>
+
+
+                    <small>
+                        Patient
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =========================================
+             INTRO
+        ========================================== -->
+
+        <section class="reports-intro">
+
+
+            <div class="intro-icon">
+                📄
+            </div>
+
+
+            <div>
+
+                <h1>
+                    Your MRI Reports
+                </h1>
+
+
+                <p>
+                    View and download reports generated
+                    from your previous MRI analyses.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             SUMMARY CARDS
+        ========================================== -->
+
+        <section class="report-summary-grid">
+
+
+            <!-- TOTAL REPORTS -->
+
+            <div class="report-summary-card">
+
+
+                <div class="summary-icon blue">
+                    📄
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Total Reports
+                    </span>
+
+
+                    <h2 id="totalReports">
+                        0
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- GENERATED REPORTS -->
+
+            <div class="report-summary-card">
+
+
+                <div class="summary-icon green">
+                    ✓
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Reports Generated
+                    </span>
+
+
+                    <h2 id="generatedReports">
+                        0
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- LATEST REPORT -->
+
+            <div class="report-summary-card">
+
+
+                <div class="summary-icon purple">
+                    ◉
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Latest Report
+                    </span>
+
+
+                    <h2 id="latestReport">
+                        —
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             REPORT LIST
+        ========================================== -->
+
+        <section class="reports-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="card-header">
+
+
+                <div>
+
+                    <span class="section-label">
+                        REPORT HISTORY
+                    </span>
+
+
+                    <h2>
+                        Previous Reports
+                    </h2>
+
+                </div>
+
+
+                <a href="upload.html"
+                   class="upload-btn">
+
+                    + Upload New MRI
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 REPORT TABLE
+            ========================================== -->
+
+            <div class="table-container">
+
+
+                <table>
+
+
+                    <!-- TABLE HEADER -->
+
+                    <thead>
+
+                        <tr>
+
+
+                            <th>
+                                Report ID
+                            </th>
+
+
+                            <th>
+                                Scan Date
+                            </th>
+
+
+                            <th>
+                                Result
+                            </th>
+
+
+                            <th>
+                                Confidence
+                            </th>
+
+
+                            <th>
+                                Status
+                            </th>
+
+
+                            <th>
+                                Actions
+                            </th>
+
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <!-- =================================
+                         DYNAMIC REPORT DATA
+                    ================================== -->
+
+                    <tbody id="reportTableBody">
+
+                        <!--
+                            Reports will be generated
+                            dynamically by reports.js.
+
+                            No hardcoded reports here.
+                        -->
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 EMPTY STATE
+            ========================================== -->
+
+            <div id="emptyReportState"
+                 class="empty-state"
+                 style="display: none;">
+
+
+                <div class="empty-icon">
+                    📄
+                </div>
+
+
+                <h3>
+                    No Reports Yet
+                </h3>
+
+
+                <p>
+                    Complete an MRI analysis to generate
+                    your first BrainCare AI report.
+                </p>
+
+
+                <a href="upload.html"
+                   class="upload-btn">
+
+                    + Upload MRI
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             REPORT INFORMATION
+        ========================================== -->
+
+        <section class="report-info-grid">
+
+
+            <!-- AI REPORT -->
+
+            <div class="report-info-card">
+
+
+                <div class="info-icon">
+                    📄
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        AI Analysis Report
+                    </h3>
+
+
+                    <p>
+                        Each report contains the MRI analysis
+                        result and AI confidence generated by
+                        the BrainCare AI system.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="report-info-card">
+
+
+                <div class="info-icon">
+                    🔒
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Private & Secure
+                    </h3>
+
+
+                    <p>
+                        Your reports are associated with your
+                        patient account and are intended only
+                        for your personal medical records.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             MEDICAL DISCLAIMER
+        ========================================== -->
+
+        <div class="medical-disclaimer">
+
+
+            <strong>
+                ⚠ Medical Disclaimer
+            </strong>
+
+
+            <p>
+
+                BrainCare AI is an AI-assisted screening
+                tool and is not a replacement for professional
+                medical diagnosis. Always consult a qualified
+                healthcare professional for medical advice.
+
+            </p>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="js/navigation.js"></script>
+<script src="js/reports.js"></script>
+
+
+</body>
+
+</html>

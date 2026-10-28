@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result | BrainCare AI</title>
+
+    <link rel="stylesheet" href="css/result.css">
+
+</head>
+
+<body>
+
+<div class="result-page">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="dashboard-brand">
+
+            <div class="dashboard-logo">
+                🧠
+            </div>
+
+            <span>
+                BrainCare <strong>AI</strong>
+            </span>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="upload.html">
+                <span>＋</span>
+                Upload MRI
+            </a>
+
+            <a href="#">
+                <span>◉</span>
+                My Scans
+            </a>
+
+            <a href="#">
+                <span>▤</span>
+                Reports
+            </a>
+
+            <a href="#">
+                <span>●</span>
+                My Profile
+            </a>
+
+            <a href="#">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="result-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="result-topbar">
+
+            <div>
+
+                <p class="page-label">
+                    Patient Dashboard
+                </p>
+
+                <h2>
+                    Prediction Result
+                </h2>
+
+            </div>
+
+
+            <div class="patient-profile">
+
+                <div class="patient-avatar">
+                    BR
+                </div>
+
+                <div>
+
+                    <strong>
+                        Bhaskar Roy
+                    </strong>
+
+                    <small>
+                        Patient
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- RESULT INTRO -->
+
+        <section class="result-intro">
+
+            <div class="intro-icon">
+                🧠
+            </div>
+
+            <div>
+
+                <h1>
+                    MRI Analysis Complete
+                </h1>
+
+                <p>
+                    BrainCare AI has completed the analysis
+                    of your uploaded MRI scan.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RESULT GRID -->
+
+        <section class="result-grid">
+
+
+            <!-- MRI IMAGE -->
+
+            <div class="result-card scan-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            MRI SCAN
+                        </span>
+
+                        <h3>
+                            Uploaded Image
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="scan-image-box">
+
+                    <img
+                        id="resultMRI"
+                        src="images/sample-mri.jpg"
+                        alt="MRI Scan">
+
+                </div>
+
+
+                <p class="scan-file-name"
+                   id="resultFileName">
+
+                    MRI Scan Image
+
+                </p>
+
+            </div>
+
+
+
+            <!-- PREDICTION -->
+
+            <div class="result-card prediction-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            AI PREDICTION
+                        </span>
+
+                        <h3>
+                            Detection Result
+                        </h3>
+
+                    </div>
+
+
+                    <span class="status-badge">
+                        Analysis Complete
+                    </span>
+
+                </div>
+
+
+                <div class="prediction-result">
+
+                    <div class="prediction-icon">
+                        ✓
+                    </div>
+
+
+                    <p class="prediction-label">
+                        Predicted Condition
+                    </p>
+
+
+                    <h1 id="predictionText">
+                        Glioma
+                    </h1>
+
+
+                    <p class="prediction-description">
+
+                        The AI model has analyzed the uploaded MRI image.
+
+                    </p>
+
+                </div>
+
+
+                <!-- CONFIDENCE -->
+
+                <div class="confidence-section">
+
+                    <div class="confidence-header">
+
+                        <span>
+                            AI Confidence
+                        </span>
+
+                        <strong id="confidenceText">
+                            98.4%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="confidence-bar">
+
+                        <div
+                            class="confidence-progress"
+                            id="confidenceProgress"
+                            style="width: 98.4%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ANALYSIS SUMMARY -->
+
+        <section class="summary-card">
+
+            <div class="summary-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ANALYSIS SUMMARY
+                    </span>
+
+                    <h2>
+                        BrainCare AI Analysis
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-content">
+
+                <div class="summary-item">
+
+                    <div class="summary-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Image Successfully Processed
+                        </h3>
+
+                        <p>
+                            The uploaded MRI image was
+                            successfully processed by the
+                            BrainCare AI system.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <div class="summary-icon">
+                        🧠
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Detected Condition
+                        </h3>
+
+                        <p id="summaryPrediction">
+                            Glioma was detected by the
+                            AI classification model.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <div class="summary-icon">
+                        %
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Prediction Confidence
+                        </h3>
+
+                        <p>
+                            The model produced a confidence
+                            score of
+                            <strong id="summaryConfidence">
+                                98.4%
+                            </strong>.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACTION BUTTONS -->
+
+        <section class="result-actions">
+
+            <a
+                href="upload.html"
+                class="secondary-btn">
+
+                ← Analyze Another MRI
+
+            </a>
+
+
+            <button
+                type="button"
+                class="primary-btn"
+                id="reportBtn">
+
+                ↓ Download Report
+
+            </button>
+
+
+            <a
+                href="dashboard.html"
+                class="dashboard-btn">
+
+                Dashboard
+
+            </a>
+
+        </section>
+
+
+
+        <!-- MEDICAL DISCLAIMER -->
+
+        <div class="medical-disclaimer">
+
+            <strong>
+                ⚠ Medical Disclaimer
+            </strong>
+
+            <p>
+
+                BrainCare AI is an AI-assisted screening
+                tool and is not a replacement for professional
+                medical diagnosis. This result should not be
+                used as the sole basis for medical decisions.
+                Always consult a qualified healthcare
+                professional for interpretation and advice.
+
+            </p>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<script src="js/result.js"></script>
+
+</body>
+
+</html>

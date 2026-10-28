@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Scans | BrainCare AI</title>
+
+    <link rel="stylesheet" href="css/scans.css">
+
+</head>
+
+
+<body>
+
+
+<div class="scans-page">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="dashboard-brand">
+
+            <div class="dashboard-logo">
+                🧠
+            </div>
+
+            <span>
+                BrainCare <strong>AI</strong>
+            </span>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a href="dashboard.html">
+
+                <span>▣</span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="upload.html">
+
+                <span>＋</span>
+
+                Upload MRI
+
+            </a>
+
+
+            <a href="scans.html"
+               class="active">
+
+                <span>◉</span>
+
+                My Scans
+
+            </a>
+
+
+            <a href="reports.html">
+
+                <span>▤</span>
+
+                Reports
+
+            </a>
+
+
+            <a href="profile.html">
+
+                <span>●</span>
+
+                My Profile
+
+            </a>
+
+
+            <a href="settings.html">
+
+                <span>⚙</span>
+
+                Settings
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html">
+
+                <span>↪</span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="scans-main">
+
+
+        <!-- =========================================
+             TOP BAR
+        ========================================== -->
+
+        <header class="scans-topbar">
+
+
+            <div>
+
+                <p class="page-label">
+                    Patient Dashboard
+                </p>
+
+
+                <h2>
+                    My Scans
+                </h2>
+
+            </div>
+
+
+
+            <!-- PATIENT PROFILE -->
+
+            <div class="patient-profile">
+
+
+                <div class="patient-avatar">
+                    BR
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Bhaskar Roy
+                    </strong>
+
+
+                    <small>
+                        Patient
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =========================================
+             INTRO
+        ========================================== -->
+
+        <section class="scans-intro">
+
+
+            <div class="intro-icon">
+                🧠
+            </div>
+
+
+            <div>
+
+                <h1>
+                    Your MRI Scan History
+                </h1>
+
+
+                <p>
+                    View your previous MRI scans and
+                    AI analysis results.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             SUMMARY CARDS
+        ========================================== -->
+
+        <section class="scan-summary-grid">
+
+
+            <!-- TOTAL SCANS -->
+
+            <div class="scan-summary-card">
+
+
+                <div class="summary-icon blue">
+                    ◉
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Total Scans
+                    </span>
+
+
+                    <h2 id="totalScans">
+                        0
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- COMPLETED SCANS -->
+
+            <div class="scan-summary-card">
+
+
+                <div class="summary-icon green">
+                    ✓
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Analyses Completed
+                    </span>
+
+
+                    <h2 id="completedScans">
+                        0
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- AVERAGE CONFIDENCE -->
+
+            <div class="scan-summary-card">
+
+
+                <div class="summary-icon purple">
+                    %
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Average Confidence
+                    </span>
+
+
+                    <h2 id="averageConfidence">
+                        0.0%
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             SCAN HISTORY
+        ========================================== -->
+
+        <section class="scan-history-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="card-header">
+
+
+                <div>
+
+                    <span class="section-label">
+                        SCAN HISTORY
+                    </span>
+
+
+                    <h2>
+                        Previous MRI Scans
+                    </h2>
+
+                </div>
+
+
+                <a href="upload.html"
+                   class="upload-btn">
+
+                    + Upload New MRI
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 TABLE
+            ========================================== -->
+
+            <div class="table-container">
+
+
+                <table>
+
+
+                    <!-- TABLE HEADER -->
+
+                    <thead>
+
+                        <tr>
+
+
+                            <th>
+                                Scan ID
+                            </th>
+
+
+                            <th>
+                                Date
+                            </th>
+
+
+                            <th>
+                                MRI File
+                            </th>
+
+
+                            <th>
+                                Result
+                            </th>
+
+
+                            <th>
+                                Confidence
+                            </th>
+
+
+                            <th>
+                                Status
+                            </th>
+
+
+                            <th>
+                                Action
+                            </th>
+
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <!-- =================================
+                         DYNAMIC SCAN DATA
+                    ================================== -->
+
+                    <tbody id="scanTableBody">
+
+                        <!--
+                            Real scan records are inserted
+                            here by scans.js.
+
+                            Example:
+
+                            MRI001
+                            test1.jpeg
+                            No Tumor
+                            100%
+                            Completed
+                        -->
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+            <!-- =========================================
+                 EMPTY STATE
+            ========================================== -->
+
+            <div id="emptyState"
+                 class="empty-state"
+                 style="display: none;">
+
+                <div class="empty-icon">
+                    🧠
+                </div>
+
+
+                <h3>
+                    No MRI Scans Yet
+                </h3>
+
+
+                <p>
+                    Upload your first MRI scan to
+                    see your AI analysis results here.
+                </p>
+
+
+                <a href="upload.html"
+                   class="upload-btn">
+
+                    + Upload MRI
+
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             INFORMATION
+        ========================================== -->
+
+        <section class="scan-info-card">
+
+
+            <div class="info-icon">
+                🔒
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Your Scan Information
+                </h3>
+
+
+                <p>
+                    Your MRI scan history is associated
+                    with your patient account. Scan records
+                    will be updated automatically after a
+                    successful AI analysis.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             MEDICAL DISCLAIMER
+        ========================================== -->
+
+        <div class="medical-disclaimer">
+
+
+            <strong>
+                ⚠ Medical Disclaimer
+            </strong>
+
+
+            <p>
+
+                BrainCare AI is an AI-assisted screening
+                tool and is not a replacement for professional
+                medical diagnosis. Always consult a qualified
+                healthcare professional for medical advice.
+
+            </p>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="js/navigation.js"></script>
+<script src="js/scans.js"></script>
+
+
+</body>
+
+</html>

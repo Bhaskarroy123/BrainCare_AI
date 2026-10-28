@@ -1,0 +1,718 @@
+/* =========================================
+   BRAINCARE AI
+   UPLOAD MRI PAGE
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f8fc;
+    color: #17233c;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================
+   MAIN PAGE
+========================================= */
+
+.upload-page {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+
+    background: #0d1b36;
+    color: white;
+
+    padding: 28px 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* BRAND */
+
+.dashboard-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    margin-bottom: 45px;
+}
+
+.dashboard-brand strong {
+    color: #55b8ff;
+}
+
+.dashboard-logo {
+    width: 44px;
+    height: 44px;
+
+    background: #1f8fff;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+
+/* =========================================
+   SIDEBAR NAVIGATION
+========================================= */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border-radius: 9px;
+
+    color: #c7d2e3;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.sidebar-nav a span {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-nav a:hover {
+    background: #16294b;
+    color: white;
+}
+
+.sidebar-nav a.active {
+    background: #1f8fff;
+    color: white;
+}
+
+
+/* =========================================
+   SIDEBAR BOTTOM
+========================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.sidebar-bottom a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border-radius: 9px;
+
+    color: #c7d2e3;
+
+    font-size: 14px;
+}
+
+.sidebar-bottom a:hover {
+    background: #16294b;
+    color: white;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.upload-main {
+    flex: 1;
+
+    padding: 25px 40px;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.upload-topbar {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid #e3e8f0;
+}
+
+.page-label {
+    color: #718096;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.upload-topbar h2 {
+    font-size: 22px;
+}
+
+
+/* PATIENT PROFILE */
+
+.patient-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.patient-avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #e1f0ff;
+
+    color: #1f8fff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.patient-profile strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+.patient-profile small {
+    display: block;
+
+    color: #718096;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.upload-intro {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 35px 0 25px;
+}
+
+.intro-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 15px;
+
+    background: #e5f2ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+.upload-intro h1 {
+    font-size: 30px;
+
+    margin-bottom: 7px;
+}
+
+.upload-intro p {
+    color: #718096;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   UPLOAD CARD
+========================================= */
+
+.upload-card {
+    max-width: 900px;
+
+    background: white;
+
+    border: 1px solid #e6ebf2;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow: 0 4px 15px rgba(20, 40, 80, 0.05);
+}
+
+
+/* =========================================
+   UPLOAD AREA
+========================================= */
+
+.upload-area {
+    border: 2px dashed #b9cce0;
+
+    border-radius: 16px;
+
+    background: #f9fbfe;
+
+    padding: 65px 30px;
+
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.upload-area:hover {
+    border-color: #1f8fff;
+
+    background: #f5faff;
+}
+
+.upload-area.dragover {
+    border-color: #1f8fff;
+
+    background: #eaf5ff;
+}
+
+
+/* UPLOAD ICON */
+
+.upload-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #e5f2ff;
+
+    color: #1f8fff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+
+    font-weight: bold;
+}
+
+
+/* TEXT */
+
+.upload-area h2 {
+    font-size: 21px;
+
+    margin-bottom: 10px;
+}
+
+.upload-area > p {
+    color: #718096;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+
+/* CHOOSE BUTTON */
+
+.choose-btn {
+    border: none;
+
+    background: #1f8fff;
+
+    color: white;
+
+    padding: 13px 25px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.choose-btn:hover {
+    background: #0879e6;
+
+    transform: translateY(-1px);
+}
+
+
+/* FILE INFO */
+
+.file-info {
+    margin-top: 15px !important;
+
+    margin-bottom: 0 !important;
+
+    color: #98a2b3 !important;
+
+    font-size: 12px !important;
+}
+
+
+/* =========================================
+   PREVIEW SECTION
+========================================= */
+
+.preview-section {
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e6ebf2;
+}
+
+.preview-section h3 {
+    font-size: 18px;
+
+    margin-bottom: 15px;
+}
+
+.preview-box {
+    width: 100%;
+
+    min-height: 250px;
+
+    max-height: 450px;
+
+    border-radius: 12px;
+
+    background: #f5f8fc;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border: 1px solid #e1e7ef;
+}
+
+.preview-box img {
+    max-width: 100%;
+
+    max-height: 420px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+.file-name {
+    color: #667085;
+
+    font-size: 13px;
+
+    margin-top: 10px;
+}
+
+
+/* REMOVE BUTTON */
+
+.remove-btn {
+    margin-top: 12px;
+
+    border: 1px solid #e1e5eb;
+
+    background: white;
+
+    color: #667085;
+
+    padding: 9px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+.remove-btn:hover {
+    background: #f5f5f5;
+
+    color: #d64545;
+}
+
+
+/* =========================================
+   ANALYZE SECTION
+========================================= */
+
+.analyze-section {
+    text-align: center;
+
+    padding-top: 25px;
+}
+
+.analyze-btn {
+    border: none;
+
+    background: #0d1b36;
+
+    color: white;
+
+    padding: 14px 30px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.analyze-btn:hover {
+    background: #16294b;
+
+    transform: translateY(-1px);
+}
+
+.analyze-section p {
+    color: #98a2b3;
+
+    font-size: 12px;
+
+    margin-top: 10px;
+}
+
+
+/* =========================================
+   INFORMATION CARDS
+========================================= */
+
+.info-grid {
+    max-width: 900px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+.info-card {
+    background: white;
+
+    border: 1px solid #e6ebf2;
+
+    border-radius: 13px;
+
+    padding: 20px;
+
+    display: flex;
+
+    gap: 13px;
+
+    box-shadow: 0 3px 12px rgba(20, 40, 80, 0.03);
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #e8f4ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.info-card h3 {
+    font-size: 14px;
+
+    margin-bottom: 6px;
+}
+
+.info-card p {
+    color: #718096;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MEDICAL DISCLAIMER
+========================================= */
+
+.medical-disclaimer {
+    max-width: 900px;
+
+    background: #fff8e8;
+
+    border: 1px solid #f1dda9;
+
+    border-radius: 12px;
+
+    padding: 16px 20px;
+
+    margin-top: 25px;
+
+    margin-bottom: 25px;
+}
+
+.medical-disclaimer strong {
+    color: #8a6415;
+
+    font-size: 13px;
+}
+
+.medical-disclaimer p {
+    color: #766b52;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-top: 6px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .upload-main {
+        padding: 25px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .upload-page {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+
+        min-height: auto;
+    }
+
+    .sidebar-nav {
+        gap: 5px;
+    }
+
+    .upload-main {
+        padding: 20px;
+    }
+
+    .upload-topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .upload-intro {
+        align-items: flex-start;
+    }
+
+    .upload-intro h1 {
+        font-size: 25px;
+    }
+
+    .upload-card {
+        padding: 18px;
+    }
+
+    .upload-area {
+        padding: 45px 15px;
+    }
+}

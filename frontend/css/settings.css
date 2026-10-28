@@ -1,0 +1,623 @@
+/* =========================================
+   BrainCare AI - Settings Page
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1e293b;
+}
+
+
+/* =========================================
+   MAIN PAGE
+========================================= */
+
+.settings-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #0f2742;
+    color: white;
+    padding: 25px 16px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.dashboard-brand strong {
+    color: #54b8ff;
+}
+
+.dashboard-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #1d6fa5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+
+/* Sidebar navigation */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.sidebar-nav a,
+.sidebar-bottom a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 14px;
+    border-radius: 9px;
+    color: #cbd8e6;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.sidebar-nav a span,
+.sidebar-bottom a span {
+    width: 20px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.sidebar-nav a:hover,
+.sidebar-bottom a:hover {
+    background: #173b5f;
+    color: white;
+}
+
+.sidebar-nav a.active {
+    background: #1d6fa5;
+    color: white;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 15px;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.settings-main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 0 35px 40px;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.settings-topbar {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.page-label {
+    color: #64748b;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.settings-topbar h2 {
+    font-size: 22px;
+    color: #172b4d;
+}
+
+.patient-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.patient-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #1769aa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.patient-profile strong {
+    display: block;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+.patient-profile small {
+    display: block;
+    margin-top: 3px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.settings-intro {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 32px 0 25px;
+}
+
+.intro-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+    background: #e0f2fe;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+}
+
+.settings-intro h1 {
+    font-size: 26px;
+    color: #172b4d;
+    margin-bottom: 6px;
+}
+
+.settings-intro p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   SETTINGS CARD
+========================================= */
+
+.settings-card {
+    background: white;
+    border: 1px solid #e5eaf0;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(15, 39, 66, 0.04);
+}
+
+.settings-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #edf1f5;
+}
+
+.settings-card-header h2 {
+    font-size: 18px;
+    color: #172b4d;
+    margin-bottom: 5px;
+}
+
+.settings-card-header p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.security-icon,
+.notification-icon,
+.privacy-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+
+/* =========================================
+   FORMS
+========================================= */
+
+.settings-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.password-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 44px;
+    padding: 0 13px;
+    border: 1px solid #d8e0e8;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #334155;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2697d4;
+    box-shadow: 0 0 0 3px rgba(38,151,212,0.1);
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.secondary-btn {
+    margin-top: 20px;
+    padding: 11px 18px;
+    border: 1px solid #2697d4;
+    background: white;
+    color: #1477ad;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.secondary-btn:hover {
+    background: #eff8ff;
+}
+
+.settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin: 10px 0 25px;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 12px 23px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    border: 1px solid #d5dde6;
+    background: white;
+    color: #64748b;
+}
+
+.cancel-btn:hover {
+    background: #f8fafc;
+}
+
+.save-btn {
+    border: none;
+    background: #1687c5;
+    color: white;
+}
+
+.save-btn:hover {
+    background: #116f9f;
+}
+
+
+/* =========================================
+   TOGGLE SWITCH
+========================================= */
+
+.setting-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 17px 0;
+    border-bottom: 1px solid #edf1f5;
+}
+
+.setting-option:last-child {
+    border-bottom: none;
+}
+
+.setting-option h3 {
+    font-size: 14px;
+    color: #334155;
+    margin-bottom: 5px;
+}
+
+.setting-option p {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+
+/* Toggle */
+
+.toggle {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #cbd5e1;
+    border-radius: 30px;
+    transition: 0.25s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle input:checked + .slider {
+    background: #1687c5;
+}
+
+.toggle input:checked + .slider::before {
+    transform: translateX(22px);
+}
+
+
+/* =========================================
+   PRIVACY INFO
+========================================= */
+
+.privacy-info {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 9px;
+    background: #f0f9ff;
+    border: 1px solid #d6effc;
+}
+
+.privacy-info strong {
+    display: block;
+    color: #075985;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.privacy-info p {
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   MEDICAL DISCLAIMER
+========================================= */
+
+.medical-disclaimer {
+    background: #fffaf0;
+    border: 1px solid #f5dfae;
+    border-radius: 10px;
+    padding: 16px 18px;
+    color: #7c5b1a;
+}
+
+.medical-disclaimer strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.medical-disclaimer p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .settings-main {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+        padding: 0 25px 35px;
+    }
+
+    .password-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 750px) {
+
+    .sidebar {
+        width: 70px;
+        padding: 20px 10px;
+    }
+
+    .dashboard-brand span {
+        display: none;
+    }
+
+    .dashboard-brand {
+        justify-content: center;
+        padding-bottom: 25px;
+    }
+
+    .sidebar-nav a,
+    .sidebar-bottom a {
+        justify-content: center;
+        padding: 13px 8px;
+    }
+
+    .sidebar-nav a:not(.active) span,
+    .sidebar-bottom a span {
+        margin: 0;
+    }
+
+    .sidebar-nav a {
+        font-size: 0;
+    }
+
+    .sidebar-nav a span {
+        font-size: 18px;
+    }
+
+    .sidebar-bottom a {
+        font-size: 0;
+    }
+
+    .sidebar-bottom a span {
+        font-size: 18px;
+    }
+
+    .settings-main {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+        padding: 0 18px 30px;
+    }
+
+    .settings-form {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-intro h1 {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .settings-topbar {
+        height: 75px;
+    }
+
+    .settings-topbar h2 {
+        font-size: 18px;
+    }
+
+    .patient-profile > div:last-child {
+        display: none;
+    }
+
+    .settings-card {
+        padding: 18px;
+    }
+
+    .settings-card-header h2 {
+        font-size: 16px;
+    }
+
+    .settings-intro {
+        padding-top: 25px;
+    }
+
+    .intro-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+    }
+
+    .settings-intro p {
+        font-size: 12px;
+    }
+
+    .settings-actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        width: 100%;
+    }
+}

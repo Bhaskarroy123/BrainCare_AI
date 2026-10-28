@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Upload MRI | BrainCare AI</title>
+
+    <link rel="stylesheet" href="css/upload.css">
+
+</head>
+
+<body>
+
+<div class="upload-page">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <!-- Brand -->
+
+        <div class="dashboard-brand">
+
+            <div class="dashboard-logo">
+                🧠
+            </div>
+
+            <span>
+                BrainCare <strong>AI</strong>
+            </span>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="upload.html" class="active">
+                <span>＋</span>
+                Upload MRI
+            </a>
+
+            <a href="#">
+                <span>◉</span>
+                My Scans
+            </a>
+
+            <a href="#">
+                <span>▤</span>
+                Reports
+            </a>
+
+            <a href="#">
+                <span>●</span>
+                My Profile
+            </a>
+
+            <a href="#">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+
+        <!-- Logout -->
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="upload-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="upload-topbar">
+
+            <div>
+
+                <p class="page-label">
+                    Patient Dashboard
+                </p>
+
+                <h2>
+                    Upload MRI
+                </h2>
+
+            </div>
+
+
+            <div class="patient-profile">
+
+                <div class="patient-avatar">
+                    BR
+                </div>
+
+                <div>
+
+                    <strong>
+                        Bhaskar Roy
+                    </strong>
+
+                    <small>
+                        Patient
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================================
+             PAGE INTRO
+        ========================================== -->
+
+        <section class="upload-intro">
+
+            <div class="intro-icon">
+                🧠
+            </div>
+
+            <div>
+
+                <h1>
+                    Upload Your MRI Scan
+                </h1>
+
+                <p>
+                    Upload a brain MRI image for
+                    AI-powered analysis with BrainCare AI.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             UPLOAD CARD
+        ========================================== -->
+
+        <section class="upload-card">
+
+
+            <div class="upload-area" id="uploadArea">
+
+
+                <!-- Upload Icon -->
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+
+                <h2>
+                    Drag & Drop Your MRI Image
+                </h2>
+
+
+                <p>
+                    or click the button below to
+                    choose an image from your computer
+                </p>
+
+
+                <!-- File Input -->
+
+                <input
+                    type="file"
+                    id="mriInput"
+                    accept=".jpg,.jpeg,.png"
+                    hidden
+                >
+
+
+                <button
+                    type="button"
+                    class="choose-btn"
+                    id="chooseBtn">
+
+                    Choose MRI Image
+
+                </button>
+
+
+                <p class="file-info">
+                    Supported formats: JPG, JPEG, PNG
+                </p>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 IMAGE PREVIEW
+            ====================================== -->
+
+            <div
+                class="preview-section"
+                id="previewSection"
+                style="display: none;">
+
+                <h3>
+                    MRI Preview
+                </h3>
+
+                <div class="preview-box">
+
+                    <img
+                        id="mriPreview"
+                        src=""
+                        alt="MRI Preview">
+
+                </div>
+
+
+                <p
+                    id="fileName"
+                    class="file-name">
+                </p>
+
+
+                <button
+                    type="button"
+                    class="remove-btn"
+                    id="removeBtn">
+
+                    Remove Image
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 ANALYZE BUTTON
+            ====================================== -->
+
+            <div
+                class="analyze-section"
+                id="analyzeSection"
+                style="display: none;">
+
+                <button
+                    type="button"
+                    class="analyze-btn"
+                    id="analyzeBtn">
+
+                    🧠 Analyze MRI
+
+                </button>
+
+                <p>
+                    Your MRI will be analyzed by
+                    BrainCare AI.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             INFORMATION CARDS
+        ========================================== -->
+
+        <section class="info-grid">
+
+
+            <!-- How it works -->
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🔍
+                </div>
+
+                <div>
+
+                    <h3>
+                        AI Analysis
+                    </h3>
+
+                    <p>
+                        Your MRI image will be processed
+                        by the BrainCare AI detection system.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Privacy -->
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🔒
+                </div>
+
+                <div>
+
+                    <h3>
+                        Secure & Private
+                    </h3>
+
+                    <p>
+                        Your scan information is associated
+                        with your patient account.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Supported -->
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Supported Files
+                    </h3>
+
+                    <p>
+                        Upload JPG, JPEG, or PNG
+                        brain MRI images.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             MEDICAL DISCLAIMER
+        ========================================== -->
+
+        <div class="medical-disclaimer">
+
+            <strong>
+                ⚠ Medical Disclaimer
+            </strong>
+
+            <p>
+                BrainCare AI is an AI-assisted screening
+                tool and is not a replacement for professional
+                medical diagnosis. Always consult a qualified
+                healthcare professional for medical advice.
+            </p>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<!-- JavaScript -->
+
+<script src="js/navigation.js"></script>
+<script src="js/upload.js"></script>
+
+</body>
+
+</html>

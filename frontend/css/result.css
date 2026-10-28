@@ -1,0 +1,840 @@
+/* =========================================
+   BRAINCARE AI
+   PREDICTION RESULT PAGE
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f8fc;
+    color: #17233c;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================
+   MAIN PAGE
+========================================= */
+
+.result-page {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+
+    background: #0d1b36;
+    color: white;
+
+    padding: 28px 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* BRAND */
+
+.dashboard-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    margin-bottom: 45px;
+}
+
+.dashboard-brand strong {
+    color: #55b8ff;
+}
+
+.dashboard-logo {
+    width: 44px;
+    height: 44px;
+
+    background: #1f8fff;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+
+/* =========================================
+   SIDEBAR NAVIGATION
+========================================= */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border-radius: 9px;
+
+    color: #c7d2e3;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.sidebar-nav a span {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-nav a:hover {
+    background: #16294b;
+    color: white;
+}
+
+
+/* Result page doesn't have a sidebar active item */
+
+.sidebar-nav a.active {
+    background: #1f8fff;
+    color: white;
+}
+
+
+/* =========================================
+   SIDEBAR BOTTOM
+========================================= */
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.sidebar-bottom a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border-radius: 9px;
+
+    color: #c7d2e3;
+
+    font-size: 14px;
+}
+
+.sidebar-bottom a:hover {
+    background: #16294b;
+    color: white;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.result-main {
+    flex: 1;
+
+    padding: 25px 40px;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.result-topbar {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid #e3e8f0;
+}
+
+.page-label {
+    color: #718096;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.result-topbar h2 {
+    font-size: 22px;
+}
+
+
+/* =========================================
+   PATIENT PROFILE
+========================================= */
+
+.patient-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.patient-avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #e1f0ff;
+
+    color: #1f8fff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.patient-profile strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+.patient-profile small {
+    display: block;
+
+    color: #718096;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   RESULT INTRO
+========================================= */
+
+.result-intro {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 35px 0 25px;
+}
+
+.intro-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 15px;
+
+    background: #e5f2ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+.result-intro h1 {
+    font-size: 30px;
+
+    margin-bottom: 7px;
+}
+
+.result-intro p {
+    color: #718096;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   RESULT GRID
+========================================= */
+
+.result-grid {
+    max-width: 1000px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   RESULT CARD
+========================================= */
+
+.result-card {
+    background: white;
+
+    border: 1px solid #e6ebf2;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 4px 15px rgba(20, 40, 80, 0.05);
+}
+
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.card-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.section-label {
+    display: block;
+
+    color: #1f8fff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+.card-header h3 {
+    font-size: 18px;
+}
+
+
+/* =========================================
+   STATUS BADGE
+========================================= */
+
+.status-badge {
+    background: #e8f8ef;
+
+    color: #18864b;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   MRI IMAGE
+========================================= */
+
+.scan-image-box {
+    width: 100%;
+
+    height: 310px;
+
+    background: #101827;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.scan-image-box img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.scan-file-name {
+    color: #718096;
+
+    font-size: 12px;
+
+    margin-top: 12px;
+}
+
+
+/* =========================================
+   PREDICTION RESULT
+========================================= */
+
+.prediction-card {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.prediction-result {
+    text-align: center;
+
+    padding: 15px 10px 25px;
+}
+
+.prediction-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #e8f8ef;
+
+    color: #1d9b5a;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+
+    font-weight: bold;
+}
+
+.prediction-label {
+    color: #718096;
+
+    font-size: 13px;
+
+    margin-bottom: 6px;
+}
+
+.prediction-result h1 {
+    font-size: 30px;
+
+    color: #17233c;
+
+    margin-bottom: 12px;
+}
+
+.prediction-description {
+    color: #718096;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    max-width: 400px;
+
+    margin: auto;
+}
+
+
+/* =========================================
+   CONFIDENCE
+========================================= */
+
+.confidence-section {
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e8edf3;
+}
+
+.confidence-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+}
+
+.confidence-header span {
+    color: #718096;
+}
+
+.confidence-header strong {
+    color: #1f8fff;
+
+    font-size: 15px;
+}
+
+.confidence-bar {
+    width: 100%;
+
+    height: 9px;
+
+    background: #e8edf3;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.confidence-progress {
+    height: 100%;
+
+    background: #1f8fff;
+
+    border-radius: 10px;
+
+    transition: width 0.5s ease;
+}
+
+
+/* =========================================
+   ANALYSIS SUMMARY
+========================================= */
+
+.summary-card {
+    max-width: 1000px;
+
+    background: white;
+
+    border: 1px solid #e6ebf2;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    margin-top: 22px;
+
+    box-shadow: 0 4px 15px rgba(20, 40, 80, 0.05);
+}
+
+.summary-header {
+    margin-bottom: 22px;
+}
+
+.summary-header h2 {
+    font-size: 19px;
+}
+
+
+/* =========================================
+   SUMMARY CONTENT
+========================================= */
+
+.summary-content {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.summary-item {
+    display: flex;
+
+    gap: 13px;
+
+    padding: 17px;
+
+    background: #f8fafd;
+
+    border-radius: 12px;
+}
+
+.summary-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #e5f2ff;
+
+    color: #1f8fff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+.summary-item h3 {
+    font-size: 13px;
+
+    margin-bottom: 6px;
+}
+
+.summary-item p {
+    color: #718096;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.result-actions {
+    max-width: 1000px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.result-actions a,
+.result-actions button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* SECONDARY */
+
+.secondary-btn {
+    background: white;
+
+    color: #17233c;
+
+    border: 1px solid #dce3eb;
+}
+
+.secondary-btn:hover {
+    background: #f5f8fc;
+}
+
+
+/* PRIMARY */
+
+.primary-btn {
+    border: none;
+
+    background: #1f8fff;
+
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #0879e6;
+
+    transform: translateY(-1px);
+}
+
+
+/* DASHBOARD */
+
+.dashboard-btn {
+    background: #0d1b36;
+
+    color: white;
+
+    border: 1px solid #0d1b36;
+
+    margin-left: auto;
+}
+
+.dashboard-btn:hover {
+    background: #16294b;
+}
+
+
+/* =========================================
+   MEDICAL DISCLAIMER
+========================================= */
+
+.medical-disclaimer {
+    max-width: 1000px;
+
+    background: #fff8e8;
+
+    border: 1px solid #f1dda9;
+
+    border-radius: 12px;
+
+    padding: 16px 20px;
+
+    margin-top: 25px;
+
+    margin-bottom: 25px;
+}
+
+.medical-disclaimer strong {
+    color: #8a6415;
+
+    font-size: 13px;
+}
+
+.medical-disclaimer p {
+    color: #766b52;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-top: 6px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .result-main {
+        padding: 25px;
+    }
+
+    .summary-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .result-page {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+
+        min-height: auto;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-actions {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-btn {
+        margin-left: 0;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .result-main {
+        padding: 20px;
+    }
+
+    .result-topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .result-intro {
+        align-items: flex-start;
+    }
+
+    .result-intro h1 {
+        font-size: 24px;
+    }
+
+    .result-card,
+    .summary-card {
+        padding: 18px;
+    }
+
+    .scan-image-box {
+        height: 250px;
+    }
+
+    .result-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .result-actions a,
+    .result-actions button {
+        width: 100%;
+    }
+}
