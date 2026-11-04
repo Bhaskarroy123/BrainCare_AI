@@ -1,12 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Login | BrainCare AI</title>
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -14,46 +13,41 @@
 
     <div class="login-container">
 
-        <!-- LEFT SIDE -->
         <div class="login-left">
 
             <div class="brand">
                 <div class="logo">🧠</div>
-
-                <span>
-                    BrainCare <strong>AI</strong>
-                </span>
+                <span>BrainCare <strong>AI</strong></span>
             </div>
-
 
             <div class="left-content">
 
                 <h1>
-                    See Beyond<br>
-                    <span>the Scan.</span>
+                    Welcome<br>
+                    <span>Back.</span>
                 </h1>
 
                 <p>
-                    AI-powered brain tumor detection designed
-                    to help you understand your MRI scans.
+                    Login to your BrainCare AI account to
+                    manage your brain MRI scans, reports,
+                    and scan history.
                 </p>
-
 
                 <div class="features">
 
                     <div class="feature">
                         <span>✓</span>
-                        <p>AI-powered MRI analysis</p>
+                        <p>Secure patient account</p>
                     </div>
 
                     <div class="feature">
                         <span>✓</span>
-                        <p>Secure patient records</p>
+                        <p>Track your MRI scan history</p>
                     </div>
 
                     <div class="feature">
                         <span>✓</span>
-                        <p>Easy scan history tracking</p>
+                        <p>Access your reports anytime</p>
                     </div>
 
                 </div>
@@ -62,8 +56,6 @@
 
         </div>
 
-
-        <!-- RIGHT SIDE -->
         <div class="login-right">
 
             <div class="login-box">
@@ -74,93 +66,54 @@
                     Login to your BrainCare AI account
                 </p>
 
+                <form id="loginForm">
 
-                <!-- EMAIL -->
+                    <div class="input-group">
 
-                <div class="input-group">
+                        <label for="email">Email Address</label>
 
-                    <label for="email">
-                        Email Address
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                    >
-
-                </div>
-
-
-                <!-- PASSWORD -->
-
-                <div class="input-group">
-
-                    <div class="password-label">
-
-                        <label for="password">
-                            Password
-                        </label>
-
-                        <a href="#">
-                            Forgot Password?
-                        </a>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
 
                     </div>
 
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
+                    <div class="input-group">
+
+                        <label for="password">Password</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                        id="loginBtn"
                     >
+                        Login
+                    </button>
 
-                </div>
+                    <p id="loginMessage" role="status"></p>
 
-
-                <!-- REMEMBER ME -->
-
-                <div class="remember">
-
-                    <label>
-
-                        <input type="checkbox">
-
-                        Remember me
-
-                    </label>
-
-                </div>
-
-
-                <!-- LOGIN BUTTON -->
-
-                <button
-                    type="button"
-                    class="login-btn"
-                >
-                    Login
-                </button>
-
-
-                <!-- SIGNUP -->
+                </form>
 
                 <p class="signup-text">
-
                     Don't have an account?
-
-                    <a href="signup.html">
-                        Create Account
-                    </a>
-
+                    <a href="signup.html">Create Account</a>
                 </p>
 
-
-                <!-- HOME -->
-
-                <a
-                    href="index.html"
-                    class="back-home"
-                >
+                <a href="index.html" class="back-home">
                     ← Back to Home
                 </a>
 
@@ -170,6 +123,7 @@
 
     </div>
 
-</body>
+    <script src="js/script.js"></script>
 
+</body>
 </html>

@@ -1,111 +1,90 @@
 // =========================================
-// BrainCare AI - Dynamic Profile JavaScript
+// BRAINCARE AI - PATIENT-WISE PROFILE
 // =========================================
 
+function getLoggedInUser() {
+    try {
+        return JSON.parse(sessionStorage.getItem("user") || "null");
+    } catch (error) {
+        console.error("Unable to read user session:", error);
+        return null;
+    }
+}
+
 
 // =========================================
-// DEFAULT PROFILE
+// GET CURRENT USER
 // =========================================
 
-const defaultProfile = {
+const currentUser = getLoggedInUser();
 
-    fullName: "Bhaskar Roy",
+if (!currentUser || !currentUser.id) {
+    alert("Please log in to access your profile.");
+    window.location.href = "login.html";
+}
 
-    email: "bhaskar@example.com",
 
-    phone: "+91 98765 43210",
+// =========================================
+// USER-SPECIFIC STORAGE KEY
+// =========================================
 
-    dob: "2004-01-15",
-
-    gender: "male",
-
-    bloodGroup: "B+",
-
-    address: "Noida, Uttar Pradesh, India",
-
-    patientId: "P0005",
-
-    accountCreated: "September 2026",
-
-    accountStatus: "Active"
-
-};
+const profileStorageKey = currentUser
+    ? `brainCareProfile_${currentUser.id}`
+    : null;
 
 
 // =========================================
 // GET FORM ELEMENTS
 // =========================================
 
-const profileForm =
-    document.getElementById("profileForm");
+const profileForm = document.getElementById("profileForm");
 
+const fullName = document.getElementById("fullName");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
+const dob = document.getElementById("dob");
+const gender = document.getElementById("gender");
+const bloodGroup = document.getElementById("bloodGroup");
+const address = document.getElementById("address");
 
-const fullName =
-    document.getElementById("fullName");
-
-
-const email =
-    document.getElementById("email");
-
-
-const phone =
-    document.getElementById("phone");
-
-
-const dob =
-    document.getElementById("dob");
-
-
-const gender =
-    document.getElementById("gender");
-
-
-const bloodGroup =
-    document.getElementById("bloodGroup");
-
-
-const address =
-    document.getElementById("address");
-
-
-const cancelBtn =
-    document.getElementById("cancelBtn");
+const cancelBtn = document.getElementById("cancelBtn");
 
 
 // =========================================
 // GET DISPLAY ELEMENTS
 // =========================================
 
-const profileName =
-    document.getElementById("profileName");
+const profileName = document.getElementById("profileName");
+const topPatientName = document.getElementById("topPatientName");
+
+const profileAvatar = document.getElementById("profileAvatar");
+const topAvatar = document.getElementById("topAvatar");
+
+const patientId = document.getElementById("patientId");
+const accountPatientId = document.getElementById("accountPatientId");
+
+const accountCreated = document.getElementById("accountCreated");
+const accountStatus = document.getElementById("accountStatus");
 
 
-const topPatientName =
-    document.getElementById("topPatientName");
+// =========================================
+// GET INITIALS
+// =========================================
 
+function getInitials(name) {
+    if (!name) return "P";
 
-const profileAvatar =
-    document.getElementById("profileAvatar");
+    const words = name.trim().split(/\s+/);
 
+    if (words.length === 1) {
+        return words[0].substring(0, 2).toUpperCase();
+    }
 
-const topAvatar =
-    document.getElementById("topAvatar");
-
-
-const patientId =
-    document.getElementById("patientId");
-
-
-const accountPatientId =
-    document.getElementById("accountPatientId");
-
-
-const accountCreated =
-    document.getElementById("accountCreated");
-
-
-const accountStatus =
-    document.getElementById("accountStatus");
+    return (
+        words[0][0] +
+        words[words.length - 1][0]
+    ).toUpperCase();
+}
 
 
 // =========================================
@@ -113,78 +92,40 @@ const accountStatus =
 // =========================================
 
 function loadProfile() {
+    if (!currentUser || !profileStorageKey) return;
 
-    const storedProfile =
-        localStorage.getItem("brainCareProfile");
+    let savedProfile = {};
 
-
-    let profile =
-        { ...defaultProfile };
-
-
-    if (storedProfile) {
-
-        try {
-
-            const savedProfile =
-                JSON.parse(storedProfile);
-
-
-            profile = {
-                ...defaultProfile,
-                ...savedProfile
-            };
-
-        } catch (error) {
-
-            console.error(
-                "Unable to load profile:",
-                error
-            );
-
-        }
-
+    try {
+        savedProfile = JSON.parse(
+            localStorage.getItem(profileStorageKey) || "{}"
+        );
+    } catch (error) {
+        console.error("Unable to load saved profile:", error);
     }
 
+    // Account name and email come from logged-in account.
+    // Other details are stored separately for each user.
 
-    // =====================================
-    // LOAD FORM VALUES
-    // =====================================
+    const profile = {
+        fullName: currentUser.name || "",
+        email: currentUser.email || "",
+        phone: savedProfile.phone || "",
+        dob: savedProfile.dob || "",
+        gender: savedProfile.gender || "",
+        bloodGroup: savedProfile.bloodGroup || "",
+        address: savedProfile.address || ""
+    };
 
-    fullName.value =
-        profile.fullName || "";
-
-
-    email.value =
-        profile.email || "";
-
-
-    phone.value =
-        profile.phone || "";
-
-
-    dob.value =
-        profile.dob || "";
-
-
-    gender.value =
-        profile.gender || "";
-
-
-    bloodGroup.value =
-        profile.bloodGroup || "";
-
-
-    address.value =
-        profile.address || "";
-
-
-    // =====================================
-    // UPDATE DISPLAY
-    // =====================================
+    if (fullName) fullName.value = profile.fullName;
+    if (email) email.value = profile.email;
+    if (phone) phone.value = profile.phone;
+    if (dob) dob.value = profile.dob;
+    if (gender) gender.value = profile.gender;
+    if (bloodGroup) bloodGroup.value = profile.bloodGroup;
+    if (address) address.value = profile.address;
 
     updateProfileDisplay(profile);
-
 }
 
 
@@ -193,132 +134,47 @@ function loadProfile() {
 // =========================================
 
 function updateProfileDisplay(profile) {
-
-    const name =
-        profile.fullName || "Bhaskar Roy";
-
-
-    // -------------------------------------
-    // Header name
-    // -------------------------------------
+    const name = profile.fullName || "Patient";
+    const initials = getInitials(name);
 
     if (profileName) {
-
-        profileName.textContent =
-            name;
-
+        profileName.textContent = name;
     }
-
 
     if (topPatientName) {
-
-        topPatientName.textContent =
-            name;
-
+        topPatientName.textContent = name;
     }
-
-
-    // -------------------------------------
-    // Avatar initials
-    // -------------------------------------
-
-    const initials =
-        getInitials(name);
-
 
     if (profileAvatar) {
-
-        profileAvatar.textContent =
-            initials;
-
+        profileAvatar.textContent = initials;
     }
-
 
     if (topAvatar) {
-
-        topAvatar.textContent =
-            initials;
-
+        topAvatar.textContent = initials;
     }
 
-
-    // -------------------------------------
-    // Patient ID
-    // -------------------------------------
+    // Generate a patient reference from the account ID.
+    const generatedPatientId =
+        "P" + String(currentUser.id).padStart(4, "0");
 
     if (patientId) {
-
-        patientId.textContent =
-            profile.patientId ||
-            defaultProfile.patientId;
-
+        patientId.textContent = generatedPatientId;
     }
-
 
     if (accountPatientId) {
-
-        accountPatientId.textContent =
-            profile.patientId ||
-            defaultProfile.patientId;
-
+        accountPatientId.textContent = generatedPatientId;
     }
-
-
-    // -------------------------------------
-    // Account information
-    // -------------------------------------
 
     if (accountCreated) {
-
         accountCreated.textContent =
-            profile.accountCreated ||
-            defaultProfile.accountCreated;
-
+            currentUser.created_at
+                ? new Date(currentUser.created_at).toLocaleDateString()
+                : "Not available";
     }
-
 
     if (accountStatus) {
-
-        accountStatus.textContent =
-            profile.accountStatus ||
-            defaultProfile.accountStatus;
-
+        accountStatus.textContent = "Active";
     }
-
-}
-
-
-// =========================================
-// GET INITIALS
-// =========================================
-
-function getInitials(name) {
-
-    if (!name) {
-
-        return "BR";
-
-    }
-
-
-    const words =
-        name.trim().split(/\s+/);
-
-
-    if (words.length === 1) {
-
-        return words[0]
-            .substring(0, 2)
-            .toUpperCase();
-
-    }
-
-
-    return (
-        words[0].charAt(0) +
-        words[words.length - 1].charAt(0)
-    ).toUpperCase();
-
 }
 
 
@@ -327,110 +183,34 @@ function getInitials(name) {
 // =========================================
 
 if (profileForm) {
+    profileForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    profileForm.addEventListener(
-        "submit",
-        function (event) {
+        if (!currentUser || !profileStorageKey) return;
 
-            event.preventDefault();
+        const profileData = {
+            phone: phone ? phone.value.trim() : "",
+            dob: dob ? dob.value : "",
+            gender: gender ? gender.value : "",
+            bloodGroup: bloodGroup ? bloodGroup.value : "",
+            address: address ? address.value.trim() : ""
+        };
 
-
-            // =================================
-            // GET FORM DATA
-            // =================================
-
-            const profileData = {
-
-                fullName:
-                    fullName.value.trim(),
-
-                email:
-                    email.value.trim(),
-
-                phone:
-                    phone.value.trim(),
-
-                dob:
-                    dob.value,
-
-                gender:
-                    gender.value,
-
-                bloodGroup:
-                    bloodGroup.value,
-
-                address:
-                    address.value.trim(),
-
-                patientId:
-                    defaultProfile.patientId,
-
-                accountCreated:
-                    defaultProfile.accountCreated,
-
-                accountStatus:
-                    defaultProfile.accountStatus
-
-            };
-
-
-            // =================================
-            // VALIDATION
-            // =================================
-
-            if (
-                profileData.fullName === "" ||
-                profileData.email === ""
-            ) {
-
-                alert(
-                    "Please enter your name and email address."
-                );
-
-                return;
-
-            }
-
-
-            // =================================
-            // SAVE TO LOCAL STORAGE
-            // =================================
-
+        try {
             localStorage.setItem(
-                "brainCareProfile",
+                profileStorageKey,
                 JSON.stringify(profileData)
             );
 
+            alert("Profile details saved successfully!");
 
-            // =================================
-            // UPDATE PAGE
-            // =================================
+            loadProfile();
 
-            updateProfileDisplay(
-                profileData
-            );
-
-
-            // =================================
-            // UPDATE DASHBOARD PATIENT NAME
-            // =================================
-
-            updateDashboardPatientName(
-                profileData.fullName
-            );
-
-
-            // =================================
-            // SUCCESS
-            // =================================
-
-            alert(
-                "Profile updated successfully!"
-            );
-
+        } catch (error) {
+            console.error("Unable to save profile:", error);
+            alert("Unable to save profile details.");
         }
-    );
-
+    });
 }
 
 
@@ -439,64 +219,9 @@ if (profileForm) {
 // =========================================
 
 if (cancelBtn) {
-
-    cancelBtn.addEventListener(
-        "click",
-        function () {
-
-            loadProfile();
-
-        }
-    );
-
-}
-
-
-// =========================================
-// UPDATE DASHBOARD PATIENT NAME
-// =========================================
-
-function updateDashboardPatientName(name) {
-
-    const storedDashboard =
-        localStorage.getItem(
-            "brainCareDashboard"
-        );
-
-
-    if (!storedDashboard) {
-
-        return;
-
-    }
-
-
-    try {
-
-        const dashboardData =
-            JSON.parse(storedDashboard);
-
-
-        dashboardData.patientName =
-            name;
-
-
-        localStorage.setItem(
-            "brainCareDashboard",
-            JSON.stringify(
-                dashboardData
-            )
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Unable to update dashboard patient name:",
-            error
-        );
-
-    }
-
+    cancelBtn.addEventListener("click", function () {
+        loadProfile();
+    });
 }
 
 
@@ -504,13 +229,8 @@ function updateDashboardPatientName(name) {
 // INITIALIZE PROFILE
 // =========================================
 
-loadProfile();
+if (currentUser && currentUser.id) {
+    loadProfile();
+}
 
-
-// =========================================
-// DEBUG
-// =========================================
-
-console.log(
-    "BrainCare AI - Profile loaded"
-);
+console.log("BrainCare AI - Patient-specific profile loaded.");

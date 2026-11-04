@@ -1,355 +1,117 @@
 // =========================================
-// BRAINCARE AI
-// MY SCANS - DYNAMIC JAVASCRIPT
+// BRAINCARE AI - PATIENT SCANS
+// Fetch scans from SQLite database
 // =========================================
 
-
-// =========================================
-// GET SAVED DASHBOARD DATA
-// =========================================
-
-const storedData =
-    localStorage.getItem("brainCareDashboard");
-
-
-let dashboardData = {
-    patientName: "Bhaskar Roy",
-    totalScans: 0,
-    completedScans: 0,
-    averageConfidence: 0,
-    latestResult: null,
-    latestConfidence: null,
-    latestDate: null,
-    scans: []
-};
+const API_URL = "http://127.0.0.1:5000";
 
 
 // =========================================
-// LOAD LOCAL STORAGE
+// GET LOGGED-IN USER
 // =========================================
 
-if (storedData) {
-
+function getLoggedInUser() {
     try {
-
-        dashboardData = JSON.parse(storedData);
-
+        return JSON.parse(sessionStorage.getItem("user") || "null");
     } catch (error) {
+        console.error("User session error:", error);
+        return null;
+    }
+}
 
-        console.error(
-            "Unable to read BrainCare AI data:",
-            error
-        );
 
+// =========================================
+// PAGE ELEMENTS
+// =========================================
+
+const totalScansElement = document.getElementById("totalScans");
+const completedScansElement = document.getElementById("completedScans");
+const averageConfidenceElement = document.getElementById("averageConfidence");
+const scanTableBody = document.getElementById("scanTableBody");
+const emptyState = document.getElementById("emptyState");
+
+
+// =========================================
+// FORMAT DATE
+// =========================================
+
+function formatDate(dateValue) {
+    if (!dateValue) return "Date unavailable";
+
+    const date = new Date(dateValue.replace(" ", "T"));
+
+    if (isNaN(date.getTime())) {
+        return dateValue;
     }
 
-}
-
-
-// Make sure scans is an array
-
-if (!Array.isArray(dashboardData.scans)) {
-
-    dashboardData.scans = [];
-
+    return date.toLocaleString();
 }
 
 
 // =========================================
-// GET HTML ELEMENTS
+// FORMAT CONFIDENCE
 // =========================================
 
-const totalScansElement =
-    document.getElementById("totalScans");
+function formatConfidence(value) {
+    const confidence = Number(value);
 
+    if (!Number.isFinite(confidence)) {
+        return "N/A";
+    }
 
-const completedScansElement =
-    document.getElementById("completedScans");
-
-
-const averageConfidenceElement =
-    document.getElementById("averageConfidence");
-
-
-const scanTableBody =
-    document.getElementById("scanTableBody");
-
-
-const emptyState =
-    document.getElementById("emptyState");
+    // Backend confidence is expected as a percentage.
+    return confidence.toFixed(2) + "%";
+}
 
 
 // =========================================
 // UPDATE SUMMARY CARDS
 // =========================================
 
-function updateSummary() {
+function updateSummary(scans) {
+    const total = scans.length;
 
-    const scans =
-        dashboardData.scans;
+    const completed = scans.filter(
+        scan => scan.prediction
+    ).length;
 
-
-    const totalScans =
-        scans.length;
-
-
-    let totalConfidence = 0;
-
-
-    // Calculate total confidence
-
-    scans.forEach(function (scan) {
-
-        totalConfidence +=
-            Number(scan.confidence) || 0;
-
-    });
-
-
-    // Calculate average
-
-    let averageConfidence = 0;
-
-
-    if (totalScans > 0) {
-
-        averageConfidence =
-            totalConfidence / totalScans;
-
-    }
-
-
-    // Save calculated values
-
-    dashboardData.totalScans =
-        totalScans;
-
-
-    dashboardData.completedScans =
-        totalScans;
-
-
-    dashboardData.averageConfidence =
-        averageConfidence;
-
-
-    // Update HTML
+    const average = total > 0
+        ? scans.reduce(
+            (sum, scan) => sum + Number(scan.confidence || 0),
+            0
+        ) / total
+        : 0;
 
     if (totalScansElement) {
-
-        totalScansElement.textContent =
-            totalScans;
-
+        totalScansElement.textContent = total;
     }
-
 
     if (completedScansElement) {
-
-        completedScansElement.textContent =
-            totalScans;
-
+        completedScansElement.textContent = completed;
     }
-
 
     if (averageConfidenceElement) {
-
         averageConfidenceElement.textContent =
-            averageConfidence.toFixed(1) + "%";
-
+            total > 0 ? average.toFixed(2) + "%" : "0%";
     }
-
 }
 
 
 // =========================================
-// GET RESULT CSS CLASS
+// DISPLAY EMPTY STATE
 // =========================================
 
-function getResultClass(result) {
-
-    if (!result) {
-
-        return "";
-
+function showEmptyState(message) {
+    if (scanTableBody) {
+        scanTableBody.replaceChildren();
     }
 
-
-    const value =
-        result.toLowerCase();
-
-
-    if (value.includes("glioma")) {
-
-        return "glioma";
-
+    if (emptyState) {
+        emptyState.style.display = "block";
+        emptyState.textContent = message;
     }
 
-
-    if (value.includes("meningioma")) {
-
-        return "meningioma";
-
-    }
-
-
-    if (value.includes("pituitary")) {
-
-        return "pituitary";
-
-    }
-
-
-    if (
-        value.includes("no tumor") ||
-        value.includes("no_tumor")
-    ) {
-
-        return "no-tumor";
-
-    }
-
-
-    return "";
-
-}
-
-
-// =========================================
-// CREATE TABLE ROW
-// =========================================
-
-function createScanRow(scan) {
-
-    const row =
-        document.createElement("tr");
-
-
-    const result =
-        scan.result || "Unknown";
-
-
-    const confidence =
-        Number(scan.confidence) || 0;
-
-
-    const scanId =
-        scan.id || "MRI";
-
-
-    const date =
-        scan.date || "-";
-
-
-    const fileName =
-        scan.fileName || "MRI Scan";
-
-
-    const resultClass =
-        getResultClass(result);
-
-
-    row.innerHTML = `
-
-        <td>
-            <strong>
-                ${scanId}
-            </strong>
-        </td>
-
-
-        <td>
-            ${date}
-        </td>
-
-
-        <td>
-            ${fileName}
-        </td>
-
-
-        <td>
-
-            <span class="result ${resultClass}">
-                ${result}
-            </span>
-
-        </td>
-
-
-        <td>
-            <strong>
-                ${confidence.toFixed(1)}%
-            </strong>
-        </td>
-
-
-        <td>
-
-            <span class="status completed">
-                Completed
-            </span>
-
-        </td>
-
-
-        <td>
-
-            <button
-                class="view-btn"
-                type="button">
-
-                View
-
-            </button>
-
-        </td>
-
-    `;
-
-
-    // =====================================
-    // VIEW BUTTON
-    // =====================================
-
-    const viewButton =
-        row.querySelector(".view-btn");
-
-
-    if (viewButton) {
-
-        viewButton.addEventListener(
-            "click",
-            function () {
-
-                alert(
-
-                    "BrainCare AI Scan Details\n\n" +
-
-                    "Scan ID: " +
-                    scanId +
-
-                    "\n\nMRI File: " +
-                    fileName +
-
-                    "\n\nResult: " +
-                    result +
-
-                    "\n\nConfidence: " +
-                    confidence.toFixed(1) +
-
-                    "%\n\nDate: " +
-                    date
-
-                );
-
-            }
-        );
-
-    }
-
-
-    return row;
-
+    updateSummary([]);
 }
 
 
@@ -357,121 +119,126 @@ function createScanRow(scan) {
 // DISPLAY SCANS
 // =========================================
 
-function displayScans() {
-
+function displayScans(scans) {
     if (!scanTableBody) {
-
-        console.error(
-            "scanTableBody was not found."
-        );
-
+        console.error("scanTableBody element not found.");
         return;
-
     }
 
+    scanTableBody.replaceChildren();
 
-    // Clear existing rows
-
-    scanTableBody.innerHTML = "";
-
-
-    const scans =
-        dashboardData.scans;
-
-
-    // =====================================
-    // NO SCANS
-    // =====================================
-
-    if (scans.length === 0) {
-
-        if (emptyState) {
-
-            emptyState.style.display =
-                "block";
-
-        }
-
-
+    if (!Array.isArray(scans) || scans.length === 0) {
+        showEmptyState("No MRI scans found.");
         return;
-
     }
-
-
-    // Hide empty state
 
     if (emptyState) {
-
-        emptyState.style.display =
-            "none";
-
+        emptyState.style.display = "none";
     }
 
+    // Newest scans first
+    scans.sort((a, b) => {
+        return new Date(b.scan_date) - new Date(a.scan_date);
+    });
 
-    // =====================================
-    // NEWEST SCAN FIRST
-    // =====================================
+    scans.forEach(scan => {
+        const row = document.createElement("tr");
 
-    const reversedScans =
-        [...scans].reverse();
+        const idCell = document.createElement("td");
+        idCell.textContent = scan.id ?? "N/A";
+
+        const fileCell = document.createElement("td");
+        fileCell.textContent = scan.file_name || "Unknown file";
+
+        const predictionCell = document.createElement("td");
+        predictionCell.textContent = scan.prediction || "N/A";
+
+        const confidenceCell = document.createElement("td");
+        confidenceCell.textContent =
+            formatConfidence(scan.confidence);
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = formatDate(scan.scan_date);
+
+        const actionCell = document.createElement("td");
+        const viewButton = document.createElement("button");
+
+        viewButton.type = "button";
+        viewButton.textContent = "View";
+
+        viewButton.addEventListener("click", function () {
+            alert(
+                "MRI Scan Details\n\n" +
+                "Scan ID: " + (scan.id ?? "N/A") + "\n" +
+                "File: " + (scan.file_name || "N/A") + "\n" +
+                "Prediction: " + (scan.prediction || "N/A") + "\n" +
+                "Confidence: " + formatConfidence(scan.confidence) + "\n" +
+                "Date: " + formatDate(scan.scan_date)
+            );
+        });
+
+        actionCell.appendChild(viewButton);
+
+        row.appendChild(idCell);
+        row.appendChild(fileCell);
+        row.appendChild(predictionCell);
+        row.appendChild(confidenceCell);
+        row.appendChild(dateCell);
+        row.appendChild(actionCell);
+
+        scanTableBody.appendChild(row);
+    });
+
+    updateSummary(scans);
+}
 
 
-    reversedScans.forEach(
-        function (scan) {
+// =========================================
+// FETCH PATIENT SCANS FROM BACKEND
+// =========================================
 
-            const row =
-                createScanRow(scan);
+async function loadPatientScans() {
+    const user = getLoggedInUser();
 
+    if (!user || !user.id) {
+        alert("Please log in to view your MRI scans.");
+        window.location.href = "login.html";
+        return;
+    }
 
-            scanTableBody.appendChild(row);
+    try {
+        const response = await fetch(
+            `${API_URL}/api/scans?user_id=${encodeURIComponent(user.id)}`
+        );
 
+        const data = await response.json();
+
+        if (!response.ok || data.success === false) {
+            throw new Error(data.error || "Unable to load scans.");
         }
-    );
 
+        const scans = Array.isArray(data)
+            ? data
+            : data.scans;
+
+        if (!Array.isArray(scans)) {
+            throw new Error("Invalid scan data received from server.");
+        }
+
+        displayScans(scans);
+
+    } catch (error) {
+        console.error("Error loading scans:", error);
+
+        showEmptyState(
+            "Unable to load scans. Please check that the backend is running."
+        );
+    }
 }
 
 
 // =========================================
-// SAVE DATA
+// LOAD SCANS WHEN PAGE OPENS
 // =========================================
 
-function saveDashboardData() {
-
-    localStorage.setItem(
-        "brainCareDashboard",
-        JSON.stringify(dashboardData)
-    );
-
-}
-
-
-// =========================================
-// RUN
-// =========================================
-
-updateSummary();
-
-displayScans();
-
-saveDashboardData();
-
-
-// =========================================
-// DEBUG INFORMATION
-// =========================================
-
-console.log(
-    "BrainCare AI - My Scans"
-);
-
-
-console.log(
-    "Total scans:",
-    dashboardData.scans.length
-);
-
-
-console.log(
-    "Scan data:",
-    dashboardData.scans
-);
+document.addEventListener("DOMContentLoaded", loadPatientScans);

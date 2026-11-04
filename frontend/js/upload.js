@@ -1,6 +1,7 @@
 // =========================================
 // BRAINCARE AI
 // UPLOAD MRI PAGE JAVASCRIPT
+// Database-integrated version
 // =========================================
 
 
@@ -19,31 +20,43 @@ const analyzeBtn = document.getElementById("analyzeBtn");
 
 
 // =========================================
+// GET LOGGED-IN USER
+// =========================================
+
+function getLoggedInUser() {
+    try {
+        return JSON.parse(sessionStorage.getItem("user") || "null");
+    } catch (error) {
+        console.error("Unable to read logged-in user:", error);
+        return null;
+    }
+}
+
+
+// =========================================
 // CHOOSE MRI IMAGE
 // =========================================
 
-chooseBtn.addEventListener("click", function () {
-
-    mriInput.click();
-
-});
+if (chooseBtn && mriInput) {
+    chooseBtn.addEventListener("click", function () {
+        mriInput.click();
+    });
+}
 
 
 // =========================================
 // WHEN FILE IS SELECTED
 // =========================================
 
-mriInput.addEventListener("change", function () {
+if (mriInput) {
+    mriInput.addEventListener("change", function () {
+        const file = mriInput.files[0];
 
-    const file = mriInput.files[0];
-
-    if (file) {
-
-        handleFile(file);
-
-    }
-
-});
+        if (file) {
+            handleFile(file);
+        }
+    });
+}
 
 
 // =========================================
@@ -51,71 +64,31 @@ mriInput.addEventListener("change", function () {
 // =========================================
 
 function handleFile(file) {
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
 
-    // Allowed file types
-    const allowedTypes = [
-        "image/jpeg",
-        "image/jpg",
-        "image/png"
-    ];
-
-
-    // Check file type
     if (!allowedTypes.includes(file.type)) {
-
-        alert(
-            "Please upload a JPG, JPEG, or PNG image."
-        );
-
+        alert("Please upload a JPG, JPEG, or PNG image.");
         mriInput.value = "";
-
         return;
     }
 
-
-    // Check file size
-    const maxSize =
-        10 * 1024 * 1024; // 10 MB
-
+    const maxSize = 10 * 1024 * 1024; // 10 MB
 
     if (file.size > maxSize) {
-
-        alert(
-            "File size must be less than 10 MB."
-        );
-
+        alert("File size must be less than 10 MB.");
         mriInput.value = "";
-
         return;
     }
 
+    const reader = new FileReader();
 
-    // Create image preview
-    const reader =
-        new FileReader();
+    reader.onload = function (event) {
+        mriPreview.src = event.target.result;
+        fileName.textContent = file.name;
 
-
-    reader.onload =
-        function (event) {
-
-            mriPreview.src =
-                event.target.result;
-
-            fileName.textContent =
-                file.name;
-
-
-            // Show preview
-            previewSection.style.display =
-                "block";
-
-
-            // Show analyze button
-            analyzeSection.style.display =
-                "block";
-
-        };
-
+        previewSection.style.display = "block";
+        analyzeSection.style.display = "block";
+    };
 
     reader.readAsDataURL(file);
 }
@@ -125,356 +98,181 @@ function handleFile(file) {
 // REMOVE IMAGE
 // =========================================
 
-removeBtn.addEventListener(
-    "click",
-    function () {
-
-        // Clear input
+if (removeBtn) {
+    removeBtn.addEventListener("click", function () {
         mriInput.value = "";
-
-
-        // Remove preview
         mriPreview.src = "";
-
-
-        // Clear file name
         fileName.textContent = "";
 
-
-        // Hide preview
-        previewSection.style.display =
-            "none";
-
-
-        // Hide analyze section
-        analyzeSection.style.display =
-            "none";
-
-    }
-);
+        previewSection.style.display = "none";
+        analyzeSection.style.display = "none";
+    });
+}
 
 
 // =========================================
 // DRAG & DROP
 // =========================================
 
+if (uploadArea) {
+    ["dragenter", "dragover", "dragleave", "drop"].forEach(function (eventName) {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
 
-// Prevent browser default behavior
-[
-    "dragenter",
-    "dragover",
-    "dragleave",
-    "drop"
-].forEach(function (eventName) {
+    function preventDefaults(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
 
-    uploadArea.addEventListener(
-        eventName,
-        preventDefaults,
-        false
-    );
+    ["dragenter", "dragover"].forEach(function (eventName) {
+        uploadArea.addEventListener(eventName, function () {
+            uploadArea.classList.add("dragover");
+        }, false);
+    });
 
-});
+    ["dragleave", "drop"].forEach(function (eventName) {
+        uploadArea.addEventListener(eventName, function () {
+            uploadArea.classList.remove("dragover");
+        }, false);
+    });
 
-
-function preventDefaults(event) {
-
-    event.preventDefault();
-
-    event.stopPropagation();
-
-}
-
-
-// =========================================
-// DRAG OVER EFFECT
-// =========================================
-
-[
-    "dragenter",
-    "dragover"
-].forEach(function (eventName) {
-
-    uploadArea.addEventListener(
-        eventName,
-        function () {
-
-            uploadArea.classList.add(
-                "dragover"
-            );
-
-        },
-        false
-    );
-
-});
-
-
-// =========================================
-// REMOVE DRAG EFFECT
-// =========================================
-
-[
-    "dragleave",
-    "drop"
-].forEach(function (eventName) {
-
-    uploadArea.addEventListener(
-        eventName,
-        function () {
-
-            uploadArea.classList.remove(
-                "dragover"
-            );
-
-        },
-        false
-    );
-
-});
-
-
-// =========================================
-// DROP FILE
-// =========================================
-
-uploadArea.addEventListener(
-    "drop",
-    function (event) {
-
-        const files =
-            event.dataTransfer.files;
-
+    uploadArea.addEventListener("drop", function (event) {
+        const files = event.dataTransfer.files;
 
         if (files.length > 0) {
+            const file = files[0];
 
-            const file =
-                files[0];
-
-
-            // Put dropped file into input
-            mriInput.files =
-                files;
-
+            const transfer = new DataTransfer();
+            transfer.items.add(file);
+            mriInput.files = transfer.files;
 
             handleFile(file);
-
         }
-
-    },
-    false
-);
+    }, false);
+}
 
 
 // =========================================
 // ANALYZE MRI WITH REAL AI MODEL
 // =========================================
 
-analyzeBtn.addEventListener(
-    "click",
-    async function () {
+if (analyzeBtn) {
+    analyzeBtn.addEventListener("click", async function () {
 
-
-        // -----------------------------
-        // Check MRI Selection
-        // -----------------------------
-
-        if (!mriInput.files.length) {
-
-            alert(
-                "Please select an MRI image first."
-            );
-
+        if (!mriInput || !mriInput.files.length) {
+            alert("Please select an MRI image first.");
             return;
         }
 
+        // Get logged-in patient
+        const user = getLoggedInUser();
 
-        const file =
-            mriInput.files[0];
+        if (!user || !user.id) {
+            alert("Please log in before analyzing an MRI.");
+            window.location.href = "login.html";
+            return;
+        }
 
+        const file = mriInput.files[0];
+        const formData = new FormData();
 
-        // -----------------------------
-        // Create FormData
-        // -----------------------------
+        formData.append("image", file);
 
-        const formData =
-            new FormData();
+        // Send patient ID to backend
+        formData.append("user_id", String(user.id));
 
-
-        formData.append(
-            "image",
-            file
-        );
-
-
-        // -----------------------------
-        // Disable Analyze Button
-        // -----------------------------
-
-        analyzeBtn.disabled =
-            true;
-
-
-        analyzeBtn.textContent =
-            "Analyzing MRI...";
-
+        analyzeBtn.disabled = true;
+        analyzeBtn.textContent = "Analyzing MRI...";
 
         try {
-
-            // =========================================
-            // SEND IMAGE TO FLASK BACKEND
-            // =========================================
-
-            const response =
-                await fetch(
-                    "http://127.0.0.1:5000/predict",
-                    {
-                        method: "POST",
-                        body: formData
-                    }
-                );
-
-
-            // -----------------------------
-            // Get Backend Response
-            // -----------------------------
-
-            const data =
-                await response.json();
-
-
-            console.log(
-                "Backend response:",
-                data
+            const response = await fetch(
+                "http://127.0.0.1:5000/predict",
+                {
+                    method: "POST",
+                    body: formData
+                }
             );
 
+            const data = await response.json();
 
-            // =========================================
-            // CHECK BACKEND RESULT
-            // =========================================
+            console.log("Backend response:", data);
 
-            if (!data.success) {
-
+            if (!response.ok || !data.success) {
                 alert(
                     "Prediction failed:\n" +
-                    (
-                        data.error ||
-                        "Unknown error"
-                    )
+                    (data.error || data.message || "Unknown error")
                 );
-
                 return;
             }
 
+            // Clear old result-save flag
+            sessionStorage.removeItem("resultSaved");
 
-            // =========================================
-            // NEW MRI RESULT
-            // CLEAR OLD SAVE FLAG
-            // =========================================
+            // Store image and file name
+            sessionStorage.setItem("mriImage", mriPreview.src);
+            sessionStorage.setItem("mriFileName", file.name);
 
-            sessionStorage.removeItem(
-                "resultSaved"
-            );
-
-
-            // =========================================
-            // SAVE MRI IMAGE
-            // =========================================
-
-            sessionStorage.setItem(
-                "mriImage",
-                mriPreview.src
-            );
-
-
-            // =========================================
-            // SAVE FILE NAME
-            // =========================================
-
-            sessionStorage.setItem(
-                "mriFileName",
-                file.name
-            );
-
-
-            // =========================================
-            // SAVE REAL AI PREDICTION
-            // =========================================
-
-            sessionStorage.setItem(
-                "mriPrediction",
-                data.prediction
-            );
-
-
-            // =========================================
-            // SAVE REAL AI CONFIDENCE
-            // =========================================
-
+            // Store prediction and confidence
+            sessionStorage.setItem("mriPrediction", data.prediction);
             sessionStorage.setItem(
                 "mriConfidence",
-                data.confidence
+                String(data.confidence)
             );
 
+            // Store database scan ID
+            if (data.scan_id !== null && data.scan_id !== undefined) {
+                sessionStorage.setItem(
+                    "mriScanId",
+                    String(data.scan_id)
+                );
+            } else {
+                sessionStorage.removeItem("mriScanId");
+            }
 
-            // =========================================
-            // DEBUG
-            // =========================================
+            // Store database report ID
+            if (data.report_id !== null && data.report_id !== undefined) {
+                sessionStorage.setItem(
+                    "mriReportId",
+                    String(data.report_id)
+                );
+            } else {
+                sessionStorage.removeItem("mriReportId");
+            }
 
-            console.log(
-                "Prediction:",
-                data.prediction
+            sessionStorage.setItem(
+                "mriSavedToDatabase",
+                String(data.saved === true)
             );
 
-            console.log(
-                "Confidence:",
-                data.confidence
-            );
+            console.log("Prediction:", data.prediction);
+            console.log("Confidence:", data.confidence);
+            console.log("Saved to database:", data.saved);
+            console.log("Scan ID:", data.scan_id);
+            console.log("Report ID:", data.report_id);
 
+            // Check whether scan was saved
+            if (data.saved !== true) {
+                alert(
+                    "Prediction completed, but the scan was not saved " +
+                    "to the patient database. Please log in again and retry."
+                );
+                return;
+            }
 
-            // =========================================
-            // OPEN RESULT PAGE
-            // =========================================
+            // Open result page
+            window.location.href = "result.html";
 
-            window.location.href =
-                "result.html";
-
-        }
-
-
-        // =========================================
-        // BACKEND CONNECTION ERROR
-        // =========================================
-
-        catch (error) {
-
-            console.error(
-                "Backend connection error:",
-                error
-            );
-
+        } catch (error) {
+            console.error("Backend connection error:", error);
 
             alert(
                 "Could not connect to BrainCare AI backend.\n\n" +
                 "Please make sure Flask server is running."
             );
 
+        } finally {
+            analyzeBtn.disabled = false;
+            analyzeBtn.textContent = "🧠 Analyze MRI";
         }
-
-
-        // =========================================
-        // RESTORE BUTTON
-        // =========================================
-
-        finally {
-
-            analyzeBtn.disabled =
-                false;
-
-
-            analyzeBtn.textContent =
-                "🧠 Analyze MRI";
-
-        }
-
-    }
-);
+    });
+}

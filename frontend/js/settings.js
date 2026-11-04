@@ -1,6 +1,39 @@
+
 // =========================================
-// BrainCare AI - Settings JavaScript
+// BRAINCARE AI - PATIENT-WISE SETTINGS
 // =========================================
+
+
+// =========================================
+// GET LOGGED-IN USER
+// =========================================
+
+function getLoggedInUser() {
+    try {
+        return JSON.parse(
+            sessionStorage.getItem("user") || "null"
+        );
+    } catch (error) {
+        console.error("Session error:", error);
+        return null;
+    }
+}
+
+const currentUser = getLoggedInUser();
+
+if (!currentUser || !currentUser.id) {
+    alert("Please log in to access settings.");
+    window.location.href = "login.html";
+}
+
+
+// =========================================
+// USER-SPECIFIC STORAGE KEY
+// =========================================
+
+const settingsStorageKey = currentUser
+    ? `brainCareSettings_${currentUser.id}`
+    : null;
 
 
 // =========================================
@@ -13,35 +46,18 @@ const accountEmail = document.getElementById("accountEmail");
 const language = document.getElementById("language");
 const timezone = document.getElementById("timezone");
 
-const currentPassword =
-    document.getElementById("currentPassword");
+const currentPassword = document.getElementById("currentPassword");
+const newPassword = document.getElementById("newPassword");
+const confirmPassword = document.getElementById("confirmPassword");
 
-const newPassword =
-    document.getElementById("newPassword");
+const scanNotification = document.getElementById("scanNotification");
+const reportNotification = document.getElementById("reportNotification");
+const emailNotification = document.getElementById("emailNotification");
+const privateAccount = document.getElementById("privateAccount");
 
-const confirmPassword =
-    document.getElementById("confirmPassword");
-
-const scanNotification =
-    document.getElementById("scanNotification");
-
-const reportNotification =
-    document.getElementById("reportNotification");
-
-const emailNotification =
-    document.getElementById("emailNotification");
-
-const privateAccount =
-    document.getElementById("privateAccount");
-
-const saveSettingsBtn =
-    document.getElementById("saveSettingsBtn");
-
-const cancelSettingsBtn =
-    document.getElementById("cancelSettingsBtn");
-
-const changePasswordBtn =
-    document.getElementById("changePasswordBtn");
+const saveSettingsBtn = document.getElementById("saveSettingsBtn");
+const cancelSettingsBtn = document.getElementById("cancelSettingsBtn");
+const changePasswordBtn = document.getElementById("changePasswordBtn");
 
 
 // =========================================
@@ -49,23 +65,84 @@ const changePasswordBtn =
 // =========================================
 
 const defaultSettings = {
-
-    accountName: "Bhaskar Roy",
-
-    accountEmail: "bhaskar@example.com",
-
     language: "english",
-
     timezone: "IST",
-
     scanNotification: true,
-
     reportNotification: true,
-
     emailNotification: true,
-
     privateAccount: true
 };
+
+
+// =========================================
+// GET PATIENT INITIALS
+// =========================================
+
+function getInitials(name) {
+
+    if (!name || !name.trim()) {
+        return "P";
+    }
+
+    const parts = name.trim().split(/\s+/);
+
+    // Single name: Alex -> AL
+    if (parts.length === 1) {
+        return parts[0].substring(0, 2).toUpperCase();
+    }
+
+    // Multiple names: Bhaskar Roy -> BR
+    return (
+        parts[0].charAt(0) +
+        parts[parts.length - 1].charAt(0)
+    ).toUpperCase();
+}
+
+
+// =========================================
+// UPDATE TOP BAR NAME AND AVATAR
+// =========================================
+
+function updatePatientName() {
+
+    if (!currentUser) return;
+
+    const name = currentUser.name || "Patient";
+    const initials = getInitials(name);
+
+    const topPatientName = document.getElementById(
+        "topPatientName"
+    );
+
+    const topAvatar = document.getElementById(
+        "topAvatar"
+    );
+
+    const patientName = document.querySelector(
+        ".patient-profile strong"
+    );
+
+    const oldAvatar = document.querySelector(
+        ".patient-profile .patient-avatar"
+    );
+
+    if (topPatientName) {
+        topPatientName.textContent = name;
+    }
+
+    if (topAvatar) {
+        topAvatar.textContent = initials;
+    }
+
+    if (patientName) {
+        patientName.textContent = name;
+    }
+
+    if (oldAvatar) {
+        oldAvatar.textContent = initials;
+    }
+
+}
 
 
 // =========================================
@@ -74,362 +151,259 @@ const defaultSettings = {
 
 function loadSettings() {
 
-    const savedSettings =
-        JSON.parse(
-            localStorage.getItem("brainCareSettings")
+    if (!currentUser || !settingsStorageKey) return;
+
+    let savedSettings = {};
+
+    try {
+
+        savedSettings = JSON.parse(
+            localStorage.getItem(settingsStorageKey) || "{}"
         );
 
-    const settings =
-        savedSettings || defaultSettings;
+    } catch (error) {
 
+        console.error("Unable to load settings:", error);
 
-    accountName.value =
-        settings.accountName || "Bhaskar Roy";
+    }
 
-    accountEmail.value =
-        settings.accountEmail || "bhaskar@example.com";
+    const settings = {
+        ...defaultSettings,
+        ...savedSettings
+    };
 
-    language.value =
-        settings.language || "english";
+    // Logged-in account details
 
-    timezone.value =
-        settings.timezone || "IST";
+    if (accountName) {
+        accountName.value = currentUser.name || "";
+    }
 
+    if (accountEmail) {
+        accountEmail.value = currentUser.email || "";
+    }
 
-    scanNotification.checked =
-        settings.scanNotification;
+    // Preferences
 
-    reportNotification.checked =
-        settings.reportNotification;
+    if (language) {
+        language.value = settings.language;
+    }
 
-    emailNotification.checked =
-        settings.emailNotification;
+    if (timezone) {
+        timezone.value = settings.timezone;
+    }
 
-    privateAccount.checked =
-        settings.privateAccount;
+    if (scanNotification) {
+        scanNotification.checked = settings.scanNotification;
+    }
+
+    if (reportNotification) {
+        reportNotification.checked = settings.reportNotification;
+    }
+
+    if (emailNotification) {
+        emailNotification.checked = settings.emailNotification;
+    }
+
+    if (privateAccount) {
+        privateAccount.checked = settings.privateAccount;
+    }
+
+    updatePatientName();
+
 }
 
 
-// Load settings when page opens
+// =========================================
+// COLLECT SETTINGS
+// =========================================
 
-loadSettings();
+function collectSettings() {
+
+    return {
+
+        language: language
+            ? language.value
+            : "english",
+
+        timezone: timezone
+            ? timezone.value
+            : "IST",
+
+        scanNotification: scanNotification
+            ? scanNotification.checked
+            : true,
+
+        reportNotification: reportNotification
+            ? reportNotification.checked
+            : true,
+
+        emailNotification: emailNotification
+            ? emailNotification.checked
+            : true,
+
+        privateAccount: privateAccount
+            ? privateAccount.checked
+            : true
+
+    };
+
+}
 
 
 // =========================================
 // SAVE SETTINGS
 // =========================================
 
-saveSettingsBtn.addEventListener(
-    "click",
-    function () {
+function saveSettings() {
 
-        const name =
-            accountName.value.trim();
+    if (!currentUser || !settingsStorageKey) return;
 
-        const email =
-            accountEmail.value.trim();
+    try {
 
-
-        // Basic validation
-
-        if (name === "") {
-
-            alert(
-                "Please enter your full name."
-            );
-
-            accountName.focus();
-
-            return;
-        }
-
-
-        if (email === "") {
-
-            alert(
-                "Please enter your email address."
-            );
-
-            accountEmail.focus();
-
-            return;
-        }
-
-
-        const settings = {
-
-            accountName: name,
-
-            accountEmail: email,
-
-            language: language.value,
-
-            timezone: timezone.value,
-
-            scanNotification:
-                scanNotification.checked,
-
-            reportNotification:
-                reportNotification.checked,
-
-            emailNotification:
-                emailNotification.checked,
-
-            privateAccount:
-                privateAccount.checked
-        };
-
-
-        // Save settings
+        const settings = collectSettings();
 
         localStorage.setItem(
-            "brainCareSettings",
+            settingsStorageKey,
             JSON.stringify(settings)
         );
 
+        alert("Settings saved successfully!");
 
-        // Also update profile name
+        updatePatientName();
 
-        const savedProfile =
-            JSON.parse(
-                localStorage.getItem(
-                    "brainCareProfile"
-                )
-            );
+    } catch (error) {
 
+        console.error("Unable to save settings:", error);
 
-        if (savedProfile) {
+        alert("Unable to save settings.");
 
-            savedProfile.fullName = name;
-            savedProfile.email = email;
-
-            localStorage.setItem(
-                "brainCareProfile",
-                JSON.stringify(savedProfile)
-            );
-        }
-
-
-        alert(
-            "Settings saved successfully!"
-        );
     }
-);
+
+}
 
 
 // =========================================
 // CANCEL SETTINGS
 // =========================================
 
-cancelSettingsBtn.addEventListener(
-    "click",
-    function () {
+function cancelSettings() {
 
-        loadSettings();
+    loadSettings();
 
-        alert(
-            "Changes have been cancelled."
-        );
-    }
-);
+    alert("Changes have been cancelled.");
+
+}
 
 
 // =========================================
 // CHANGE PASSWORD
 // =========================================
 
-changePasswordBtn.addEventListener(
-    "click",
-    function () {
+function changePassword() {
 
-        const current =
-            currentPassword.value.trim();
+    const current = currentPassword
+        ? currentPassword.value
+        : "";
 
-        const newPass =
-            newPassword.value.trim();
+    const newPass = newPassword
+        ? newPassword.value
+        : "";
 
-        const confirmPass =
-            confirmPassword.value.trim();
+    const confirmPass = confirmPassword
+        ? confirmPassword.value
+        : "";
 
+    if (!current || !newPass || !confirmPass) {
 
-        // Validation
+        alert("Please fill all password fields.");
 
-        if (current === "") {
+        return;
 
-            alert(
-                "Please enter your current password."
-            );
-
-            currentPassword.focus();
-
-            return;
-        }
-
-
-        if (newPass === "") {
-
-            alert(
-                "Please enter a new password."
-            );
-
-            newPassword.focus();
-
-            return;
-        }
-
-
-        if (newPass.length < 6) {
-
-            alert(
-                "New password must contain at least 6 characters."
-            );
-
-            newPassword.focus();
-
-            return;
-        }
-
-
-        if (confirmPass === "") {
-
-            alert(
-                "Please confirm your new password."
-            );
-
-            confirmPassword.focus();
-
-            return;
-        }
-
-
-        if (newPass !== confirmPass) {
-
-            alert(
-                "New password and confirmation password do not match."
-            );
-
-            confirmPassword.focus();
-
-            return;
-        }
-
-
-        /*
-            Frontend demo only.
-
-            Real password verification and password
-            storage will be implemented in the backend.
-        */
-
-        alert(
-            "Password change request submitted successfully!"
-        );
-
-
-        // Clear password fields
-
-        currentPassword.value = "";
-        newPassword.value = "";
-        confirmPassword.value = "";
     }
-);
 
+    if (newPass.length < 8) {
 
-// =========================================
-// NOTIFICATION SETTINGS
-// =========================================
+        alert("New password must contain at least 8 characters.");
 
-scanNotification.addEventListener(
-    "change",
-    function () {
+        return;
 
-        console.log(
-            "Scan notifications:",
-            this.checked
-        );
     }
-);
 
+    if (newPass !== confirmPass) {
 
-reportNotification.addEventListener(
-    "change",
-    function () {
+        alert("New password and confirmation do not match.");
 
-        console.log(
-            "Report notifications:",
-            this.checked
-        );
+        return;
+
     }
-);
 
+    alert(
+        "Password change is not connected to the backend yet. " +
+        "Your password has not been changed."
+    );
 
-emailNotification.addEventListener(
-    "change",
-    function () {
-
-        console.log(
-            "Email notifications:",
-            this.checked
-        );
-    }
-);
-
-
-// =========================================
-// PRIVATE ACCOUNT
-// =========================================
-
-privateAccount.addEventListener(
-    "change",
-    function () {
-
-        console.log(
-            "Private account:",
-            this.checked
-        );
-    }
-);
-
-
-// =========================================
-// UPDATE PROFILE NAME IN TOP BAR
-// =========================================
-
-function updatePatientName() {
-
-    const patientName =
-        document.querySelector(
-            ".patient-profile strong"
-        );
-
-
-    if (patientName) {
-
-        patientName.textContent =
-            accountName.value ||
-            "Bhaskar Roy";
-    }
 }
 
 
-updatePatientName();
+// =========================================
+// EVENT LISTENERS
+// =========================================
+
+if (saveSettingsBtn) {
+
+    saveSettingsBtn.addEventListener(
+        "click",
+        saveSettings
+    );
+
+}
+
+if (cancelSettingsBtn) {
+
+    cancelSettingsBtn.addEventListener(
+        "click",
+        cancelSettings
+    );
+
+}
+
+if (changePasswordBtn) {
+
+    changePasswordBtn.addEventListener(
+        "click",
+        changePassword
+    );
+
+}
 
 
 // =========================================
-// UPDATE NAME WHEN SAVING
+// LOGOUT
 // =========================================
 
-saveSettingsBtn.addEventListener(
-    "click",
-    function () {
+const logoutLink = document.getElementById("logoutLink");
 
-        setTimeout(
-            function () {
+if (logoutLink) {
 
-                updatePatientName();
+    logoutLink.addEventListener("click", function () {
 
-            },
-            100
-        );
-    }
+        sessionStorage.removeItem("user");
+
+    });
+
+}
+
+
+// =========================================
+// INITIALIZE SETTINGS
+// =========================================
+
+if (currentUser && currentUser.id) {
+
+    loadSettings();
+
+}
+
+console.log(
+    "BrainCare AI - Patient-specific settings loaded."
 );

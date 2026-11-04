@@ -1,12 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Settings | BrainCare AI</title>
-
     <link rel="stylesheet" href="css/settings.css">
 </head>
 
@@ -14,7 +13,7 @@
 
 <div class="settings-page">
 
-    <!-- ================= SIDEBAR ================= -->
+    <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="dashboard-brand">
@@ -25,285 +24,180 @@
         <nav class="sidebar-nav">
 
             <a href="dashboard.html">
-                <span>▣</span>
-                Dashboard
+                <span>▣</span> Dashboard
             </a>
 
             <a href="upload.html">
-                <span>＋</span>
-                Upload MRI
+                <span>＋</span> Upload MRI
             </a>
 
             <a href="scans.html">
-                <span>◉</span>
-                My Scans
+                <span>◉</span> My Scans
             </a>
 
             <a href="reports.html">
-                <span>▤</span>
-                Reports
+                <span>▤</span> Reports
             </a>
 
             <a href="profile.html">
-                <span>●</span>
-                My Profile
+                <span>●</span> My Profile
             </a>
 
             <a href="settings.html" class="active">
-                <span>⚙</span>
-                Settings
+                <span>⚙</span> Settings
             </a>
 
         </nav>
 
         <div class="sidebar-bottom">
-
-            <a href="index.html">
-                <span>↪</span>
-                Logout
+            <a href="index.html" id="logoutLink">
+                <span>↪</span> Logout
             </a>
-
         </div>
 
     </aside>
 
-
-    <!-- ================= MAIN CONTENT ================= -->
-
+    <!-- MAIN CONTENT -->
     <main class="settings-main">
 
         <!-- TOP BAR -->
-
         <header class="settings-topbar">
 
             <div>
-
-                <p class="page-label">
-                    Patient Dashboard
-                </p>
-
-                <h2>
-                    Settings
-                </h2>
-
+                <p class="page-label">Patient Dashboard</p>
+                <h2>Settings</h2>
             </div>
-
 
             <div class="patient-profile">
 
-                <div class="patient-avatar">
-                    BR
+                <div class="patient-avatar" id="topAvatar">
+                    P
                 </div>
 
                 <div>
-
-                    <strong>
-                        Bhaskar Roy
-                    </strong>
-
-                    <small>
-                        Patient
-                    </small>
-
+                    <strong id="topPatientName">Patient</strong>
+                    <small>Patient</small>
                 </div>
 
             </div>
 
         </header>
 
-
-        <!-- ================= INTRO ================= -->
-
+        <!-- INTRO -->
         <section class="settings-intro">
 
-            <div class="intro-icon">
-                ⚙
-            </div>
+            <div class="intro-icon">⚙</div>
 
             <div>
-
-                <h1>
-                    Account Settings
-                </h1>
+                <h1>Account Settings</h1>
 
                 <p>
                     Manage your account preferences, notifications,
                     privacy and security settings.
                 </p>
-
             </div>
 
         </section>
 
-
-        <!-- ================= ACCOUNT SETTINGS ================= -->
-
+        <!-- ACCOUNT SETTINGS -->
         <section class="settings-card">
 
             <div class="settings-card-header">
-
                 <div>
-
-                    <h2>
-                        Account Settings
-                    </h2>
-
-                    <p>
-                        Manage your basic account preferences.
-                    </p>
-
+                    <h2>Account Settings</h2>
+                    <p>Manage your basic account preferences.</p>
                 </div>
-
             </div>
-
 
             <div class="settings-form">
 
                 <div class="form-group">
-
-                    <label for="accountName">
-                        Full Name
-                    </label>
-
+                    <label for="accountName">Full Name</label>
                     <input
                         type="text"
                         id="accountName"
-                        value="Bhaskar Roy"
+                        placeholder="Your full name"
+                        readonly
                     >
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label for="accountEmail">
-                        Email Address
-                    </label>
-
+                    <label for="accountEmail">Email Address</label>
                     <input
                         type="email"
                         id="accountEmail"
-                        value="bhaskar@example.com"
+                        placeholder="Your email address"
+                        readonly
                     >
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label for="language">
-                        Language
-                    </label>
+                    <label for="language">Language</label>
 
                     <select id="language">
-
-                        <option value="english">
-                            English
-                        </option>
-
-                        <option value="hindi">
-                            Hindi
-                        </option>
-
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
                     </select>
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label for="timezone">
-                        Time Zone
-                    </label>
+                    <label for="timezone">Time Zone</label>
 
                     <select id="timezone">
-
                         <option value="IST">
                             India Standard Time (IST)
                         </option>
-
                     </select>
-
                 </div>
 
             </div>
 
         </section>
 
-
-        <!-- ================= PASSWORD ================= -->
-
+        <!-- PASSWORD -->
         <section class="settings-card">
 
             <div class="settings-card-header">
 
                 <div>
-
-                    <h2>
-                        Password & Security
-                    </h2>
-
-                    <p>
-                        Manage your account password.
-                    </p>
-
+                    <h2>Password &amp; Security</h2>
+                    <p>Manage your account password.</p>
                 </div>
 
-                <div class="security-icon">
-                    🔒
-                </div>
+                <div class="security-icon">🔒</div>
 
             </div>
-
 
             <div class="password-section">
 
                 <div class="form-group">
-
-                    <label for="currentPassword">
-                        Current Password
-                    </label>
-
+                    <label for="currentPassword">Current Password</label>
                     <input
                         type="password"
                         id="currentPassword"
                         placeholder="Enter current password"
                     >
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label for="newPassword">
-                        New Password
-                    </label>
-
+                    <label for="newPassword">New Password</label>
                     <input
                         type="password"
                         id="newPassword"
                         placeholder="Enter new password"
                     >
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label for="confirmPassword">
-                        Confirm New Password
-                    </label>
-
+                    <label for="confirmPassword">Confirm New Password</label>
                     <input
                         type="password"
                         id="confirmPassword"
                         placeholder="Confirm new password"
                     >
-
                 </div>
 
             </div>
-
 
             <button
                 type="button"
@@ -315,180 +209,107 @@
 
         </section>
 
-
-        <!-- ================= NOTIFICATIONS ================= -->
-
+        <!-- NOTIFICATIONS -->
         <section class="settings-card">
 
             <div class="settings-card-header">
 
                 <div>
-
-                    <h2>
-                        Notifications
-                    </h2>
-
+                    <h2>Notifications</h2>
                     <p>
                         Choose which notifications you want to receive.
                     </p>
-
                 </div>
 
-                <div class="notification-icon">
-                    🔔
-                </div>
+                <div class="notification-icon">🔔</div>
 
             </div>
-
 
             <div class="setting-option">
 
                 <div>
-
-                    <h3>
-                        Scan Analysis Notifications
-                    </h3>
-
+                    <h3>Scan Analysis Notifications</h3>
                     <p>
                         Get notified when your MRI analysis is completed.
                     </p>
-
                 </div>
 
                 <label class="toggle">
-
-                    <input
-                        type="checkbox"
-                        id="scanNotification"
-                        checked
-                    >
-
+                    <input type="checkbox" id="scanNotification" checked>
                     <span class="slider"></span>
-
                 </label>
 
             </div>
 
-
             <div class="setting-option">
 
                 <div>
-
-                    <h3>
-                        Report Notifications
-                    </h3>
-
+                    <h3>Report Notifications</h3>
                     <p>
                         Receive notifications when a new report is generated.
                     </p>
-
                 </div>
 
                 <label class="toggle">
-
-                    <input
-                        type="checkbox"
-                        id="reportNotification"
-                        checked
-                    >
-
+                    <input type="checkbox" id="reportNotification" checked>
                     <span class="slider"></span>
-
                 </label>
 
             </div>
 
-
             <div class="setting-option">
 
                 <div>
-
-                    <h3>
-                        Email Notifications
-                    </h3>
-
+                    <h3>Email Notifications</h3>
                     <p>
                         Receive important account updates by email.
                     </p>
-
                 </div>
 
                 <label class="toggle">
-
-                    <input
-                        type="checkbox"
-                        id="emailNotification"
-                        checked
-                    >
-
+                    <input type="checkbox" id="emailNotification" checked>
                     <span class="slider"></span>
-
                 </label>
 
             </div>
 
         </section>
 
-
-        <!-- ================= PRIVACY ================= -->
-
+        <!-- PRIVACY -->
         <section class="settings-card">
 
             <div class="settings-card-header">
 
                 <div>
-
-                    <h2>
-                        Privacy & Security
-                    </h2>
-
+                    <h2>Privacy &amp; Security</h2>
                     <p>
                         Manage your data and privacy preferences.
                     </p>
-
                 </div>
 
-                <div class="privacy-icon">
-                    🛡
-                </div>
+                <div class="privacy-icon">🛡</div>
 
             </div>
-
 
             <div class="setting-option">
 
                 <div>
-
-                    <h3>
-                        Private Account
-                    </h3>
-
+                    <h3>Private Account</h3>
                     <p>
                         Keep your medical information visible only to your account.
                     </p>
-
                 </div>
 
                 <label class="toggle">
-
-                    <input
-                        type="checkbox"
-                        id="privateAccount"
-                        checked
-                    >
-
+                    <input type="checkbox" id="privateAccount" checked>
                     <span class="slider"></span>
-
                 </label>
 
             </div>
 
-
             <div class="privacy-info">
 
-                <strong>
-                    🔒 Your Privacy Matters
-                </strong>
+                <strong>🔒 Your Privacy Matters</strong>
 
                 <p>
                     Your patient information and MRI scan records
@@ -499,9 +320,7 @@
 
         </section>
 
-
-        <!-- ================= SAVE BUTTON ================= -->
-
+        <!-- SAVE BUTTON -->
         <section class="settings-actions">
 
             <button
@@ -522,14 +341,10 @@
 
         </section>
 
-
-        <!-- ================= DISCLAIMER ================= -->
-
+        <!-- DISCLAIMER -->
         <div class="medical-disclaimer">
 
-            <strong>
-                ⚠ Medical Disclaimer
-            </strong>
+            <strong>⚠ Medical Disclaimer</strong>
 
             <p>
                 BrainCare AI is an AI-assisted screening tool and is not
@@ -544,10 +359,53 @@
 
 </div>
 
-
+<!-- JAVASCRIPT FILES -->
 <script src="js/navigation.js"></script>
 <script src="js/settings.js"></script>
 
-</body>
+<!-- USER PROFILE -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
+    const user = JSON.parse(sessionStorage.getItem("user") || "null");
+
+    if (!user || !user.id) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const name = (user.name || "Patient").trim();
+
+    // Generate initials
+    const words = name.split(/\s+/);
+
+    let initials = "";
+
+    if (words.length === 1) {
+        // Single name: first two letters
+        initials = words[0].substring(0, 2);
+    } else {
+        // Multiple names: first letter of first two words
+        initials = words[0].charAt(0) + words[1].charAt(0);
+    }
+
+    initials = initials.toUpperCase();
+
+    // Update avatar and patient name
+    document.getElementById("topAvatar").textContent = initials;
+    document.getElementById("topPatientName").textContent = name;
+
+    // Update account details
+    document.getElementById("accountName").value = name;
+    document.getElementById("accountEmail").value = user.email || "";
+
+    // Logout
+    document.getElementById("logoutLink").addEventListener("click", function () {
+        sessionStorage.removeItem("user");
+    });
+
+});
+</script>
+
+</body>
 </html>
